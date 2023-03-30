@@ -1,0 +1,7 @@
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:509:19:find_snap_point_y	72	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:454:19:find_snap_point_x	72	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:611:19:elastic_diff	32	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:46:6:_lv_indev_scroll_handler	88	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:112:6:_lv_indev_scroll_throw_handler	40	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:223:12:lv_indev_scroll_throw_predict	4	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_indev_scroll.c:248:6:lv_indev_scroll_get_snap_dist	16	static

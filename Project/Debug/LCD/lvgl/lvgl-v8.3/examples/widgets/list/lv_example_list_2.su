@@ -1,0 +1,8 @@
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:98:13:event_handler_swap	32	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:39:13:event_handler_top	8	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:88:13:event_handler_bottom	8	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:61:13:event_handler_center	8	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:76:13:event_handler_dn	8	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:49:13:event_handler_up	8	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:12:13:event_handler	24	static
+../LCD/lvgl/lvgl-v8.3/examples/widgets/list/lv_example_list_2.c:115:6:lv_example_list_2	24	static

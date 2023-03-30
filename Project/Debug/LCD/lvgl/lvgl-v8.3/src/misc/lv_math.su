@@ -1,0 +1,7 @@
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:48:31:lv_trigo_sin	0	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:83:10:lv_bezier3	12	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:109:28:lv_sqrt	4	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:132:10:lv_atan2	0	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:214:9:lv_pow	4	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:236:9:lv_map	0	static
+../LCD/lvgl/lvgl-v8.3/src/misc/lv_math.c:257:10:lv_rand	0	static

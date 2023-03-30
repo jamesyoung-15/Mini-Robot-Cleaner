@@ -1,0 +1,10 @@
+02:45:11 **** Incremental Build of configuration Debug for project TouchPad ****
+make -j16 all 
+arm-none-eabi-size   TouchPad.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17708	    172	   1668	  19548	   4c5c	TouchPad.elf
+Finished building: default.size.stdout
+ 
+
+02:45:11 Build Finished. 0 errors, 0 warnings. (took 121ms)
+

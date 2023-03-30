@@ -1,0 +1,7 @@
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:147:13:lv_checkbox_event	264	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:134:13:lv_checkbox_destructor	8	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:118:13:lv_checkbox_constructor	8	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:56:12:lv_checkbox_create	8	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:68:6:lv_checkbox_set_text	16	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:91:6:lv_checkbox_set_text_static	16	static
+../LCD/lvgl/lvgl-v8.3/src/widgets/lv_checkbox.c:108:14:lv_checkbox_get_text	0	static

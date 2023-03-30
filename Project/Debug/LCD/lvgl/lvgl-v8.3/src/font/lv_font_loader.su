@@ -1,0 +1,5 @@
+../LCD/lvgl/lvgl-v8.3/src/font/lv_font_loader.c:194:21:read_bits	32	static
+../LCD/lvgl/lvgl-v8.3/src/font/lv_font_loader.c:225:12:read_label	24	static
+../LCD/lvgl/lvgl-v8.3/src/font/lv_font_loader.c:117:6:lv_font_free	32	static
+../LCD/lvgl/lvgl-v8.3/src/font/lv_font_loader.c:587:9:load_kern	48	static
+../LCD/lvgl/lvgl-v8.3/src/font/lv_font_loader.c:86:13:lv_font_load	152	static

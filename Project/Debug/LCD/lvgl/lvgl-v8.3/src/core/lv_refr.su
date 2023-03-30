@@ -1,0 +1,14 @@
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:1229:13:call_flush_cb	16	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:721:19:lv_refr_get_top_obj	24	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:102:6:_lv_refr_init	0	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:129:6:lv_obj_redraw	56	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:882:6:refr_obj	104	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:761:13:refr_obj_and_children	40	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:612:13:refr_area_part	216	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:205:6:_lv_inv_area	32	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:266:13:_lv_refr_get_disp_refreshing	0	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:277:6:_lv_refr_set_disp_refreshing	0	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:286:6:_lv_disp_refr_timer	88	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:112:6:lv_refr_now	8	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:441:6:lv_refr_reset_fps_counter	0	static
+../LCD/lvgl/lvgl-v8.3/src/core/lv_refr.c:447:10:lv_refr_get_fps_avg	0	static

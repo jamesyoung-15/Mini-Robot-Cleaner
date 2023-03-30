@@ -1,0 +1,5 @@
+../LCD/lcd_core/xpt2046.c:84:13:XPT2046_DelayUS	8	static
+../LCD/lcd_core/xpt2046.c:95:13:XPT2046_WriteCMD	24	static
+../LCD/lcd_core/xpt2046.c:117:17:XPT2046_ReadCMD	24	static
+../LCD/lcd_core/xpt2046.c:42:6:XPT2046_Init	48	static
+../LCD/lcd_core/xpt2046.c:233:9:XPT2046_Get_TouchedPoint	80	static

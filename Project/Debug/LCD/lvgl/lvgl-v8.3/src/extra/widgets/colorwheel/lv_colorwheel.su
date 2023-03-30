@@ -1,0 +1,14 @@
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:616:13:fast_hsv2rgb	12	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:334:18:get_knob_area	32	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:549:13:refr_knob_pos	32	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:224:13:lv_colorwheel_constructor	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:77:12:lv_colorwheel_create	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:97:6:lv_colorwheel_set_hsv	24	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:123:6:lv_colorwheel_set_rgb	16	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:136:6:lv_colorwheel_set_mode	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:151:6:lv_colorwheel_set_mode_fixed	0	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:169:16:lv_colorwheel_get_hsv	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:182:12:lv_colorwheel_get_rgb	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:356:13:lv_colorwheel_event	192	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:195:22:lv_colorwheel_get_color_mode	0	static
+../LCD/lvgl/lvgl-v8.3/src/extra/widgets/colorwheel/lv_colorwheel.c:208:6:lv_colorwheel_get_color_mode_fixed	0	static

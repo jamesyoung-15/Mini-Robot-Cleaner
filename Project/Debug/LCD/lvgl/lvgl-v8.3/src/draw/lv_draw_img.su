@@ -1,0 +1,8 @@
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:345:13:show_error	112	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:46:6:lv_draw_img_dsc_init	8	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:93:9:lv_img_cf_get_px_size	0	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:138:6:lv_img_cf_is_chroma_keyed	0	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:161:6:lv_img_cf_has_alpha	0	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:194:14:lv_img_src_get_type	0	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:219:6:lv_draw_img_decoded	24	static
+../LCD/lvgl/lvgl-v8.3/src/draw/lv_draw_img.c:62:6:lv_draw_img	88	static

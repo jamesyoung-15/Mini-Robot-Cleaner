@@ -1,0 +1,6 @@
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:65:16:anim_path_bezier3_cb	24	static
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:86:13:anim_x_cb	8	static
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:91:13:run_btn_event_handler	8	static
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:76:13:refer_chart_cubic_bezier	32	static
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:99:13:slider_event_cb	32	static
+../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim_3.c:37:6:lv_example_anim_3	48	static

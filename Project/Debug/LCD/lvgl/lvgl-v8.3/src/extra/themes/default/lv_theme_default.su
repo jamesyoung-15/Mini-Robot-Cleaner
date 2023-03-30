@@ -1,0 +1,7 @@
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:698:13:theme_apply	16	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:192:19:dark_color_filter_cb	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:1171:13:style_init_reset	8	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:198:19:grey_filter_cb	16	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:648:14:lv_theme_default_init	40	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:683:14:lv_theme_default_get	0	static
+../LCD/lvgl/lvgl-v8.3/src/extra/themes/default/lv_theme_default.c:692:6:lv_theme_default_is_inited	0	static
