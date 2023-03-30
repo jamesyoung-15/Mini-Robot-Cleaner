@@ -1,0 +1,34 @@
+#include "esp.h"
+
+
+void esp_init()
+{
+	// Reset the module : AT+RST
+	char data[] = "AT+RST";
+	HAL_UART_Transmit(&huart2,data,sizeof(data),10);
+	HAL_Delay(5);
+
+
+	// Set the Wi-Fi mode : AT+CWMODE (1: station, 2: soft ap, 3: soft ap + station)
+	char data[] = "AT+CWMODE=1";
+	HAL_UART_Transmit(&huart2,data,sizeof(data),10);
+	HAL_Delay(5);
+
+
+}
+
+// Connect to wifi
+void connect_wifi(char *ssid, char *passwd)
+{
+	//
+}
+
+// Create web server
+void create_server();
+
+// Send char data to web server
+void sendData(char* data);
+
+// Receive char data from web server
+void receiveData(char* data);
+

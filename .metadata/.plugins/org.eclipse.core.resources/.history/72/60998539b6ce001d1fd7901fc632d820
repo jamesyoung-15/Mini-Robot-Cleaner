@@ -1,0 +1,25 @@
+// Header for esp driver
+
+#ifndef ESP_H
+#define ESP_H
+
+#include "string.h"
+#include ""
+
+
+// Connect to wifi
+void connect_wifi(char *ssid, char *passwd);
+
+// Create web server
+void create_server();
+
+// Send char data to web server
+void sendData(char* data);
+
+// Receive char data from web server
+void receiveData(char* data);
+
+
+
+
+#endif
