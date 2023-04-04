@@ -9,4 +9,12 @@
 			<item value="com.st.stm32cube.common.projectcreation.ui.category"/>
 		</list>
 	</section>
+	<section name="CleanDialogSettings">
+		<item key="BUILD_NOW" value="true"/>
+		<item key="BUILD_ALL" value="true"/>
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="644"/>
+		<item key="DIALOG_HEIGHT" value="473"/>
+		<item key="DIALOG_FONT_NAME" value="1|Monospace|10.0|0|GTK|1|"/>
+	</section>
 </section>

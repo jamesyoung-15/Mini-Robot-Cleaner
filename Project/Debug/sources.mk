@@ -24,6 +24,8 @@ SUBDIRS := \
 Core/Src \
 Core/Startup \
 Drivers/STM32F1xx_HAL_Driver/Src \
+ESP_Driver \
+LCD/gui \
 LCD/lcd_core \
 LCD/lvgl \
 LCD/lvgl/lvgl-v8.3/demos/benchmark/assets \

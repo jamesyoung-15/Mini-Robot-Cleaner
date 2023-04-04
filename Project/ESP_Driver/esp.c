@@ -1,19 +1,18 @@
 #include "esp.h"
 
 
-
 // Initialize ESP and connect it to WIFI
 void esp_init(char *ssid, char *passwd)
 {
 	// Reset the module : AT+RST
 	char data[] = "AT+RST";
-	HAL_UART_Transmit(&huart2,data,strlen(data),10);
+	HAL_UART_Transmit(&huart3,data,strlen(data),10);
 	HAL_Delay(5);
 
 
 	// Set the Wi-Fi mode : AT+CWMODE (1: station, 2: soft ap, 3: soft ap + station)
-	char data[] = "AT+CWMODE=1";
-	HAL_UART_Transmit(&huart2,data,strlen(data),10);
+	char data1[] = "AT+CWMODE=1";
+	HAL_UART_Transmit(&huart3,data1,strlen(data),10);
 	HAL_Delay(5);
 
 

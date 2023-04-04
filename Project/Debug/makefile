@@ -136,6 +136,8 @@ RM := rm -rf
 -include LCD/lvgl/lvgl-v8.3/demos/benchmark/subdir.mk
 -include LCD/lvgl/subdir.mk
 -include LCD/lcd_core/subdir.mk
+-include LCD/gui/subdir.mk
+-include ESP_Driver/subdir.mk
 -include Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk

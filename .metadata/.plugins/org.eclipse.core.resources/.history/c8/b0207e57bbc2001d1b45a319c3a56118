@@ -1,7 +1,0 @@
-#include "../../lv_conf.h"
-#include "../../lvgl/lvgl.h"
-
-#include "lvgl_init.h"
-
-
-}

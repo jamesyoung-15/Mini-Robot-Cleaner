@@ -1,0 +1,4 @@
+../ESP_Driver/esp.c:5:6:esp_init	40	static
+../ESP_Driver/esp.c:30:6:create_server	0	static
+../ESP_Driver/esp.c:36:6:sendData	0	static
+../ESP_Driver/esp.c:42:6:receiveData	0	static

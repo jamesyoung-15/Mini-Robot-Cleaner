@@ -6,7 +6,7 @@
 #include "string.h"
 #include "stm32f1xx_hal.h"
 
-
+extern UART_HandleTypeDef huart3;
 
 //initialize esp
 void esp_init(char *ssid, char *passwd);

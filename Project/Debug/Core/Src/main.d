@@ -23,6 +23,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_fsmc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/lvgl.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/src/misc/lv_log.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/src/misc/../lv_conf_internal.h \
@@ -281,7 +282,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/qrcode/lv_example_qrcode.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/freetype/lv_example_freetype.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/rlottie/lv_example_rlottie.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h
+ ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h \
+ ../Core/Src/../../LCD/gui/debug.h \
+ ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h \
+ ../Core/Src/../../ESP_Driver/esp.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -307,6 +311,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_fsmc.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/lvgl.h:
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/src/misc/lv_log.h:
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/src/misc/../lv_conf_internal.h:
@@ -566,3 +571,6 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/freetype/lv_example_freetype.h:
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/rlottie/lv_example_rlottie.h:
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h:
+../Core/Src/../../LCD/gui/debug.h:
+../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
+../Core/Src/../../ESP_Driver/esp.h:
