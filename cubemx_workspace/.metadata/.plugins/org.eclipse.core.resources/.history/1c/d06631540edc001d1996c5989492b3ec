@@ -1,0 +1,6 @@
+#ifndef WEBSOCKET_KEY_H
+#define WEBSOCKET_KEY_H
+
+void generate_key(char receivedKey[],char outputKey);
+
+#endif

@@ -1,0 +1,32 @@
+// Header for esp driver
+
+#ifndef ESP_H
+#define ESP_H
+
+// Includes
+#include "stdio.h"
+#include "string.h"
+#include "stm32f1xx_hal.h"
+#include "../LCD/gui/menu.h"
+
+// Var
+
+
+extern UART_HandleTypeDef huart3;
+extern uint8_t single_buffer;
+
+// Functions
+void sendData(char * command);
+void showResponse();
+void clearReceivedBuffer();
+void echoOff();
+void checkAT();
+void resetEsp();
+void connectWifi(char* ssid, char* passwd);
+void sendResponse(char *response);
+void sendWebsite();
+void serverHandler();
+void checkWifiState();
+void checkIP();
+void checkAPs();
+#endif

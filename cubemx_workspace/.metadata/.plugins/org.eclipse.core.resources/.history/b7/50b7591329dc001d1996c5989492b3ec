@@ -1,0 +1,230 @@
+#include "esp.h"
+
+// Documentation: https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-wstate
+
+#define RX_BUFFER_SIZE  2048
+
+// Global Variables
+char buffer[RX_BUFFER_SIZE]; //Buffer for received response from ESP8266
+uint8_t single_buffer = 0;
+uint32_t buffer_index = 0;
+char* html_file="<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Document</title>\n</head>\n<body>\n    <header>\n        <h1>Mini Robot Cleaner</h1>\n    </header>\n    <main>\n        <div class=\"test-area\">\n            <button class=\"button-style\" onclick=\"inputIP()\">Connect Socket</button>\n            <button class=\"button-style\" onclick=\"sendData()\">Send to Socket</button>\n            <button class=\"button-style\" onclick=\"closeSocket()\">Close Socket</button>\n        </div>\n    </main>\n</body>\n<style>\n    *{\n    font-family: monospace;\n    font-size: 18px;\n    }\n    body\n    {\n        overflow: hidden;\n        background-color: #0a0a23;;\n        margin: 0;\n    }\n    header\n    {\n        text-align: center;\n        background-color: #0a0a23;\n        text-align: center;\n        color: #f8f8f2;\n        height: 60px;\n        width: 100%;\n        align-items: center;\n        /* padding: 0 15px; */\n    }\n    header h1\n    {\n        font-size: 24px;\n    }\n    main\n    {\n        background-color: #1b1b32;\n        color: white;\n        height: 100vh;\n        width: 100%;\n    }\n    .button-style\n    {\n        border: 1px solid #383a59;\n        cursor: pointer;\n        display: inline-block;\n        outline: none;\n        padding: 5px 20px;\n        text-align: center;\n        transition: all .3s ease-in-out;\n        background-color: #0a0a23;\n        color: #ffffff;\n        border-radius: 5px;\n    }\n    .button-style:hover{\n        background: #bd93f9;\n        color: #000;\n    }\n    .test-area\n    {\n        padding-top: 20px;\n        width: 70%;\n        margin: 0 auto;\n        display: flex;\n        justify-content: space-between;\n        flex-direction: row;\n        flex-wrap: wrap;\n    }\n</style>\n<script>\n    var socket = null;\n    function sendData()\n    {\n        if(socket==null)\n        {\n            console.log(\"No connection.\");\n            // alert(\"Not connected\");\n        }\n        else\n        {\n            console.log(\"Sent message\");\n            socket.send(\"Hello\");\n        }\n    }\n    function connectSocket(ipaddr)\n    {\n        console.log(\"wsl://\"+ipaddr+\":80\");\n        socket = new WebSocket(\"ws://\"+ipaddr);\n        // socket = new WebSocket(\"ws://ws.ifelse.io\");\n        if(socket!=null)\n        {\n            socket.onopen = function(){\n                console.log(\"Connected\");\n            }\n            socket.onerror = function (error) {\n                console.log('Web Socket Error ', error);\n                alert('Web Socket Error ', error);\n            };\n            socket.onclose = function(){\n                alert('Web socket closed')\n            };\n            socket.onmessage = function(message){\n                console.log(\"Received: \");\n                console.log(message)\n            };\n        }\n    }\n    function closeSocket()\n    {\n        if(socket!=null)\n        {\n            socket.close();\n            console.log(\"Closed socket\");\n        }\n    }\n    //check if input IP is an valid IP address\n    // function validateIP(input)\n    // {\n    //     var ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;\n    //     if(input.match(ipformat)){\n    //         return true;\n    //     }\n    //     else{\n    //         return false;\n    //     }\n    // };\n\n    function inputIP()\n    {\n        let text;\n        var ipaddr = prompt(\"Please enter robot's IP and port:\", \"\");\n        if (ipaddr == null || ipaddr == \"\") {\n            text = \"No IP entered.\";\n            alert(text);\n            ipaddr =null;\n        }\n        // else if(validateIP(ipaddr)!=true){\n        //     text = \"Invalid IP.\";\n        //     ipaddr=null;\n        //     alert(text);\n        // }\n        else {\n            text = \"Entered IP: \" + ipaddr + \".\";\n            connectSocket(ipaddr);\n        }\n    }\n</script>\n</html>";
+
+
+
+// Function sends string to ESP8266 via UART3
+void sendData(char * command)
+{
+	clearReceivedBuffer();
+	// Send command, wait till UART finishes transmitting command
+    HAL_UART_Transmit(&huart3, (uint8_t *)command,strlen(command),5000);
+    while(HAL_UART_GetState(&huart3) == HAL_UART_STATE_BUSY_TX);
+}
+
+// Show the response received from ESP8266 via UART3, writes response to LCD screen
+void showResponse()
+{
+	char temp[RX_BUFFER_SIZE+100];
+	sprintf(temp,"Size: %d\n%s", strlen(buffer),buffer);
+	print_debug(temp);
+    clearReceivedBuffer();
+}
+
+// Reset the buffer
+void clearReceivedBuffer()
+{
+    buffer_index = 0;
+    memset(buffer,0,sizeof(buffer));
+}
+
+
+// Send "AT" to check if working, should respond with OK
+void checkAT()
+{
+	sendData("AT\r\n");
+	HAL_Delay(1000);
+	showResponse();
+}
+
+// Turn off echo
+void echoOff()
+{
+	sendData("ATE0\r\n");
+	HAL_Delay(500);
+	clearReceivedBuffer();
+}
+
+// Reset module
+void resetEsp()
+{
+	sendData("AT+RST\r\n");
+	HAL_Delay(5000);
+	clearReceivedBuffer();
+}
+
+
+// Connect to WIFI
+void connectWifi(char* ssid, char* passwd)
+{
+	sendData("AT+CWMODE=1\r\n");
+	HAL_Delay(200);
+	sendData("AT+CWDHCP=1,1\r\n");
+	HAL_Delay(200);
+	sendData("AT+CIPMUX=1\r\n");
+	HAL_Delay(200);
+	sendData("AT+CIPSERVER=1,80\r\n");
+	HAL_Delay(200);
+	char wifi_info[100]={0};
+	sprintf(wifi_info,"AT+CWJAP=\"%s\",\"%s\"\r\n",ssid,passwd);
+	sendData(wifi_info);
+	HAL_Delay(5000);
+	clearReceivedBuffer();
+//	showResponse();
+//	HAL_Delay(1000);
+}
+
+// sends HTTP response to server
+void sendResponse(char response[])
+{
+	char data[100] = {0};
+	char http_response[200] = {0};
+	char at_command[50] = {0};
+	// Create HTTP response, append relevant data to response
+	sprintf(data,"Data: %s",response);
+	sprintf(http_response,"HTTP/1.1 200 OK\r\nContent-Length: %i\r\nContent-Type: text/plain\r\n\r\n%s",strlen(data),data);
+	// Send data through ESP8266
+	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(http_response));
+	sendData(at_command);
+	HAL_Delay(100);
+	sendData(http_response);
+	HAL_Delay(200);
+	showResponse();
+	sendData("AT+CIPCLOSE=0\r\n");
+	clearReceivedBuffer();
+}
+
+// sends html file to server
+void sendWebsite()
+{
+	char at_command[50] = {0};
+	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(html_file));
+	sendData(at_command);
+	HAL_Delay(100);
+	sendData(html_file);
+	HAL_Delay(100);
+	sendData("AT+CIPCLOSE=0\r\n");
+	HAL_Delay(100);
+	clearReceivedBuffer();
+}
+
+// web socket handshake response
+void sendHandShake(char *requestKey)
+{
+	char response[400]={0};
+	char printStuff[100]={0};
+	char returnKey[60]={0};
+	print_debug(requestKey);
+//	generate_key(requestKey,returnKey);
+//	sprintf(printStuff,"%s \n %s",requestKey,returnKey);
+//	print_debug(printStuff);
+//	sprintf(response,"HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: %s\r\n\r\n",returnKey);
+//	clearReceivedBuffer();
+//	char at_command[50] = {0};
+//	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(response));
+//	sendData(at_command);
+//	HAL_Delay(200);
+//	sendData(response);
+//	HAL_Delay(4000);
+//	sendData("AT+CIPCLOSE=0\r\n");
+//	HAL_Delay(100);
+//	clearReceivedBuffer();
+
+}
+
+// handles incoming requests
+void serverHandler()
+{
+//	if(strstr(buffer,"GET")!=NULL)
+//	{
+//		sendWebsite();
+//	}
+	if(strstr(buffer,"WebSocket-Key")!=NULL)
+	{
+//		showResponse();
+		char temp[60]={0};
+		char* find = strstr(buffer,"WebSocket-Key");
+		int pos = find - buffer;
+		pos = pos + strlen("WebSocket-Key")+2;
+		for(int i=0;i<24;i++)
+		{
+			temp[i] = buffer[pos];
+			pos++;
+		}
+		print_debug(temp);
+		sendHandShake(temp);
+	}
+}
+
+// Query WIFI state, response: 0 not started, 1 connected but no IP, 2 connected and has IP, 3 connecting/reconnecting, 4 disconnect
+void checkWifiState()
+{
+	sendData("AT+CWJAP?\r\n");
+	HAL_Delay(100);
+	showResponse();
+}
+
+// Get WIFI IP
+void checkIP()
+{
+	sendData("AT+CIFSR\r\n");
+	HAL_Delay(100);
+	char temp[30]={0};
+	if(strstr(buffer,"STAIP")!=NULL)
+	{
+		char *find = strstr(buffer,"STAIP");
+		int pos = find - buffer;
+		pos += 7;
+		int i =0;
+		while(buffer[pos]!='"')
+		{
+			temp[i] = buffer[pos];
+			pos++;
+			i++;
+		}
+	}
+	else
+	{
+		sprintf(temp,"Error");
+	}
+	sprintf(buffer,temp);
+	showResponse();
+}
+
+// Check list of available APs
+void checkAPs()
+{
+	sendData("AT+CWLAP");;
+	HAL_Delay(100);
+	showResponse();
+}
+
+// UART callback function, adds response to buffer
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+    if(huart->Instance==USART3)
+    {
+    	// check overflow
+        if(buffer_index >= (RX_BUFFER_SIZE-1))
+        {
+        	clearReceivedBuffer();
+        }
+
+        else
+        {
+            buffer[buffer_index] = single_buffer;
+            buffer_index++;
+        }
+        HAL_UART_Receive_IT(&huart3, (uint8_t *)&single_buffer, 1);
+    }
+}
+
+// End File

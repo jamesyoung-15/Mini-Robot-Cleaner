@@ -1,0 +1,5 @@
+lv_draw_sw_blend.c:945:26:color_blend_true_color_additive	3
+lv_draw_sw_blend.c:998:26:color_blend_true_color_subtractive	3
+lv_draw_sw_blend.c:1024:26:color_blend_true_color_multiply	3
+lv_draw_sw_blend.c:91:6:lv_draw_sw_blend	4
+lv_draw_sw_blend.c:104:28:lv_draw_sw_blend_basic	155

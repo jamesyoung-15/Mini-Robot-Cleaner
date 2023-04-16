@@ -1,0 +1,4 @@
+#include "test_esp.h"
+
+uint8_t buffer[2000];
+uint16_t buffer_index = 0;

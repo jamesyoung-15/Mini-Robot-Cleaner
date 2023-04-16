@@ -1,0 +1,14 @@
+#ifndef TEST_ESP_H_
+#define TEST_ESP_H
+
+#include "main.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "esp.h"
+
+// Send "AT" to check if working, should respond with OK
+void checkAT();
+
+
+#endif

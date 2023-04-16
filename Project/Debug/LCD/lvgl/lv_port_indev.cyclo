@@ -1,0 +1,2 @@
+lv_port_indev.c:191:13:touchpad_read	2
+lv_port_indev.c:71:6:lv_port_indev_init	1

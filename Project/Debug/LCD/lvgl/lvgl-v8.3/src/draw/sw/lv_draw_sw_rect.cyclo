@@ -1,0 +1,6 @@
+lv_draw_sw_rect.c:1040:35:shadow_blur_corner	19
+lv_draw_sw_rect.c:100:13:draw_bg	38
+lv_draw_sw_rect.c:330:13:draw_bg_img	11
+lv_draw_sw_rect.c:85:6:lv_draw_sw_bg	1
+lv_draw_sw_rect.c:1155:6:draw_border_generic	57
+lv_draw_sw_rect.c:69:6:lv_draw_sw_rect	117

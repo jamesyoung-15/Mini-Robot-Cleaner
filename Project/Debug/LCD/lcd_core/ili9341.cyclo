@@ -1,0 +1,14 @@
+ili9341.c:54:13:ILI9341_Delay	3
+ili9341.c:30:7:ILI9341_Write_Cmd	1
+ili9341.c:38:7:ILI9341_Write_Data	1
+ili9341.c:46:11:ILI9341_Read_Data	1
+ili9341.c:385:6:LCD_SetBackColor	1
+ili9341.c:408:7:ILI9341_BackLed_Control	2
+ili9341.c:422:10:ILI9341_ReadID	2
+ili9341.c:456:6:ILI9341_Rst	1
+ili9341.c:469:6:ILI9341_GramScan	5
+ili9341.c:520:6:ILI9341_OpenWindow	1
+ili9341.c:537:6:ILI9341_OpenWindow2	1
+ili9341.c:569:6:ILI9341_Clear	3
+ili9341.c:390:6:ILI9341_Init	3
+ili9341.c:581:6:ILI9341_DrawDot	3

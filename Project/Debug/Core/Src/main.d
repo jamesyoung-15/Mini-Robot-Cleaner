@@ -18,6 +18,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h \
@@ -285,7 +286,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h \
  ../Core/Src/../../LCD/gui/debug.h \
  ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h \
- ../Core/Src/../../ESP_Driver/esp.h
+ ../Core/Src/../../LCD/gui/menu.h ../Core/Src/../../ESP_Driver/esp.h \
+ ../Core/Src/../../ESP_Driver/../LCD/gui/menu.h \
+ ../Core/Src/../../ESP_Driver/websocket_key.h \
+ ../Core/Src/../../ESP_Driver/sha1.h \
+ ../Core/Src/../../ESP_Driver/base64.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -306,6 +311,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h:
@@ -573,4 +579,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h:
 ../Core/Src/../../LCD/gui/debug.h:
 ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
+../Core/Src/../../LCD/gui/menu.h:
 ../Core/Src/../../ESP_Driver/esp.h:
+../Core/Src/../../ESP_Driver/../LCD/gui/menu.h:
+../Core/Src/../../ESP_Driver/websocket_key.h:
+../Core/Src/../../ESP_Driver/sha1.h:
+../Core/Src/../../ESP_Driver/base64.h:

@@ -3,28 +3,30 @@
 #ifndef ESP_H
 #define ESP_H
 
+// Includes
+#include "stdio.h"
 #include "string.h"
 #include "stm32f1xx_hal.h"
+#include "../LCD/gui/menu.h"
+#include "websocket_key.h"
+// Var
 
 extern UART_HandleTypeDef huart3;
+extern uint8_t single_buffer;
+extern uint8_t detect_server;
 
-//initialize esp
-void esp_init(char *ssid, char *passwd);
-
-
-// Create web server
-void create_server();
-
-// Send char data to web server
-void sendData(char* data);
-
-// Receive char data from web server
-void receiveData(char* data);
-
-
-// Get IP of device
-char* getIP();
-
-
-
+// Functions
+void sendData(char * command);
+void showResponse();
+void clearReceivedBuffer();
+void echoOff();
+void checkAT();
+void resetEsp();
+void connectWifi(char* ssid, char* passwd);
+void sendResponse(char *response);
+void sendWebsite();
+void serverHandler();
+void checkWifiState();
+void checkIP();
+void checkAPs();
 #endif

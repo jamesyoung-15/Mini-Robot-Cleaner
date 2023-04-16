@@ -1,0 +1,8 @@
+lv_example_list_2.c:98:13:event_handler_swap	5
+lv_example_list_2.c:39:13:event_handler_top	3
+lv_example_list_2.c:88:13:event_handler_bottom	3
+lv_example_list_2.c:61:13:event_handler_center	3
+lv_example_list_2.c:76:13:event_handler_dn	3
+lv_example_list_2.c:49:13:event_handler_up	4
+lv_example_list_2.c:12:13:event_handler	4
+lv_example_list_2.c:115:6:lv_example_list_2	2

@@ -1,0 +1,5 @@
+lv_example_menu_5.c:124:13:switch_handler	3
+lv_example_menu_5.c:113:13:back_event_handler	2
+lv_example_menu_5.c:143:19:create_text	6
+lv_example_menu_5.c:171:19:create_slider	2
+lv_example_menu_5.c:20:6:lv_example_menu_5	3

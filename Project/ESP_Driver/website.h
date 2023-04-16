@@ -1,0 +1,5 @@
+#ifndef STATIC_WEB_H
+#define STATIC_WEB_H
+
+
+#endif

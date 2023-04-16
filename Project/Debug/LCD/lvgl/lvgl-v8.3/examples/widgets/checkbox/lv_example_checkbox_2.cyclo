@@ -1,0 +1,3 @@
+lv_example_checkbox_2.c:9:13:radio_event_handler	2
+lv_example_checkbox_2.c:28:13:radiobutton_create	1
+lv_example_checkbox_2.c:40:6:lv_example_checkbox_2	3

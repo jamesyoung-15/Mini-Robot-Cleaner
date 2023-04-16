@@ -1,0 +1,4 @@
+lv_theme_basic.c:173:13:theme_apply	37
+lv_theme_basic.c:418:13:style_init_reset	2
+lv_theme_basic.c:138:6:lv_theme_basic_is_inited	1
+lv_theme_basic.c:143:14:lv_theme_basic_init	4

@@ -1,0 +1,9 @@
+lv_draw_sw_gradient.c:110:17:find_oldest_item_life	2
+lv_draw_sw_gradient.c:151:17:find_item	1
+lv_draw_sw_gradient.c:97:17:iterate_cache	8
+lv_draw_sw_gradient.c:140:17:kill_oldest_item	5
+lv_draw_sw_gradient.c:235:6:lv_gradient_free_cache	1
+lv_draw_sw_gradient.c:242:6:lv_gradient_set_cache_size	2
+lv_draw_sw_gradient.c:296:39:lv_gradient_calculate	6
+lv_draw_sw_gradient.c:251:13:lv_gradient_get	12
+lv_draw_sw_gradient.c:341:6:lv_gradient_cleanup	2

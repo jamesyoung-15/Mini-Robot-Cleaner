@@ -2,6 +2,7 @@
 
 #include "debug.h"
 
+
 void gui_test(void)
 {
     /*Change the active screen's background color*/

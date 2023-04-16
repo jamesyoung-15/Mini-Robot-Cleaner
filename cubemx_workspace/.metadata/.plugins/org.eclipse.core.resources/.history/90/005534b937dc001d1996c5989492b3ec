@@ -1,0 +1,13 @@
+#ifndef WEBSOCKET_KEY_H
+#define WEBSOCKET_KEY_H
+
+#include "sha1.h"
+#include "base64.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+
+void generate_key(char *receivedKey,char *outputKey);
+
+#endif

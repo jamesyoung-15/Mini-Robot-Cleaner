@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Project/ESP_Driver/files.h&apos; to &apos;website.h&apos;" description="Rename resource &apos;files.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="ESP_Driver/files.h" name="website.h" stamp="1681582363078" updateReferences="true"/>
+</session>

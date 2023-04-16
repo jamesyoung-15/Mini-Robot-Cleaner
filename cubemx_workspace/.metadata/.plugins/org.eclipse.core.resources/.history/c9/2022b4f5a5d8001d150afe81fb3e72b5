@@ -1,0 +1,8 @@
+#ifndef MENU_H
+#define MENU_H
+
+#include "../lvgl/lvgl-v8.3/lvgl.h"
+
+extern lv_obj_t * ui_menu;
+
+#endif MENU

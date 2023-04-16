@@ -24,6 +24,9 @@ extern "C" {
 #include "../lcd_core/ili9341.h"
 #endif
 
+// external variable for dma
+extern DMA_HandleTypeDef hdma_memtomem_dma1_channel1;
+
 /*********************
  *      DEFINES
  *********************/
