@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete 7 resources" deleteContents="false" description="Delete 7 resources" element1="/Project/ESP_Driver/base64.c" element2="/Project/ESP_Driver/base64.h" element3="/Project/ESP_Driver/sha1.c" element4="/Project/ESP_Driver/sha1.h" element5="/Project/ESP_Driver/website.h" element6="/Project/ESP_Driver/websocket_key.c" element7="/Project/ESP_Driver/websocket_key.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="7" stamp="1681734011126"/>
+</session>

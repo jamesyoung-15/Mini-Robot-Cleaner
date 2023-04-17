@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="nav-header">
+            <!-- <div class="nav-left">
+                <h3>Status: <span id="connect-status">Disconnected</span></h3>
+            </div> -->
+            <div class="nav-center">
+                <h1>Dashboard</h1>
+            </div>
+            <!-- <div class="nav-right">
+                <button onclick="inputIP()" class="button-style">Connect</button>
+            </div> -->
+        </nav>
+    </header>
+    <main>
+        <!-- Sensor Reading Section -->
+        <!-- <section class="data-table">
+            <span id="show-time"></span>
+            <table>
+                <thead>
+                <tr>
+                  <th>Temp</th>
+                  <th>Humidity</th>
+                  <th>CO2</th>
+                  <th>PM10</th>
+                  <th>PM2.5</th>
+                  <th>TVOC</th>  
+                </tr>
+              </thead>
+              <tbody id="data-output"></tbody>
+            </table>
+        </section> -->
+        <!-- Camera Stream and joystick -->
+        <div class="container-area">
+            <!-- <div class="camera-stream" id="create-stream"></div> -->
+            <div class="joystick-container" id="joystick-area">
+                <div class="joystick" id="nipple"></div>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+<script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
+<script src="./js/script.js"></script>
+</html>

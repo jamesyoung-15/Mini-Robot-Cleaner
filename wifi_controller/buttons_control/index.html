@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<body>
+    <header>
+        <h1>Mini Robot Cleaner</h1>
+    </header>
+    <main>
+        <div class="test-area">
+            <div class="top-row">
+                <button class="button-style" onclick="button(this)" id="1">UP</button>
+            </div>
+            <div class ="bottom-row">
+                <button class="button-style" onclick="button(this)" id="2">LEFT</button>
+                <button class="button-style" onclick="button(this)" id="3">RIGHT</button>
+                <button class="button-style" onclick="button(this)" id="4">DOWN</button>
+        
+            </div>
+        </div>
+    </main>
+</body>
+<style>
+    *{
+    font-family: monospace;
+    font-size: 18px;
+    }
+    body
+    {
+        overflow: hidden;
+        background-color: #0a0a23;;
+        margin: 0;
+        color: #f8f8f2;
+    }
+    header
+    {
+        text-align: center;
+        background-color: #0a0a23;
+        text-align: center;
+    }
+    main
+    {
+        background-color: #1b1b32;
+        height: 100vh;
+    }
+    .button-style
+    {
+        margin: 15px;
+        padding: 5px 20px;
+        background-color: #0a0a23;
+        color: #ffffff;
+    }
+    .test-area
+    {
+        margin: auto;
+        width: 320px;
+        text-align: center;
+    }
+</style>
+<script>
+    var ip_address = "http://192.168.40.104:80";
+    var interval;
+    function button(ele){
+        var x = ele.id;
+        switch(x){
+            case '1':
+                move(x,'Forward');
+                console.log(x);
+                break;
+            case '2':
+                move(x,'Left');
+                break;
+            case '3':
+                move(x,'Right');
+                break;
+            case '4':
+                move(x,'Backward');
+                break;
+        }
+    }
+    function move(x,dir)
+    {
+        document.getElementById(x).onmousedown = function(){
+            interval = setInterval(function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://10.15.15.137/" + dir, true);
+                xhr.send();
+            },800)};
+        document.getElementById(x).onmouseup = function(){
+            clearInterval(interval);
+        };
+    }
+</script>
+</html>

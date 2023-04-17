@@ -1,9 +1,0 @@
-../ESP_Driver/sha1.c:4:6:sha1_init	0	static
-../ESP_Driver/sha1.c:14:10:sha1_rol32	0	static
-../ESP_Driver/sha1.c:18:6:sha1_hashBlock	64	static
-../ESP_Driver/sha1.c:55:6:sha1_addUncounted	8	static
-../ESP_Driver/sha1.c:69:6:sha1_writebyte	8	static
-../ESP_Driver/sha1.c:74:6:sha1_write	16	static
-../ESP_Driver/sha1.c:78:6:sha1_pad	16	static
-../ESP_Driver/sha1.c:96:10:sha1_result	8	static
-../ESP_Driver/sha1.c:117:6:printHash	16	static

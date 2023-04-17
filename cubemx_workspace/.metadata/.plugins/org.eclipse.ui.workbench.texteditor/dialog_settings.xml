@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="method"/>
+		<item key="selection" value="700"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="method"/>
-			<item value="clearre"/>
-			<item value="index"/>
-			<item value="10.15.15"/>
-			<item value="yangfa"/>
-			<item value="messa"/>
-			<item value="huart1"/>
-			<item value="huart"/>
-			<item value="reset"/>
-			<item value="set"/>
-			<item value="gpio"/>
+			<item value="700"/>
+			<item value="750"/>
+			<item value="650"/>
+			<item value="clearinter"/>
+			<item value="800"/>
+			<item value="serverh"/>
+			<item value="server_h"/>
+			<item value="server_ha"/>
+			<item value="detect_ser"/>
+			<item value="detect_s"/>
+			<item value="ip_add"/>
+			<item value="github"/>
+			<item value="echo"/>
+			<item value="checkip"/>
+			<item value="echoOff"/>
 		</list>
 		<list key="replacehistory">
 			<item value="huart3"/>
@@ -27,8 +31,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="1102"/>
 		<item key="DIALOG_Y_ORIGIN" value="436"/>
-		<item key="DIALOG_WIDTH" value="340"/>
-		<item key="DIALOG_HEIGHT" value="437"/>
-		<item key="DIALOG_FONT_NAME" value="1|Fira Sans|10.0|0|GTK|1|"/>
+		<item key="DIALOG_WIDTH" value="357"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
+		<item key="DIALOG_FONT_NAME" value="1|Sans|10.0|0|GTK|1|"/>
 	</section>
 </section>

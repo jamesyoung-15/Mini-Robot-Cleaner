@@ -1,2 +1,0 @@
-../ESP_Driver/base64.c:13:7:hexToBin	40	static
-../ESP_Driver/base64.c:99:8:binToBase64	96	static
