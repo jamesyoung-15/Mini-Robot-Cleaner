@@ -18,13 +18,13 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-LCD/gui/%.o LCD/gui/%.su LCD/gui/%.cyclo: ../LCD/gui/%.c LCD/gui/subdir.mk
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
+LCD/gui/%.o LCD/gui/%.su: ../LCD/gui/%.c LCD/gui/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 
 clean: clean-LCD-2f-gui
 
 clean-LCD-2f-gui:
-	-$(RM) ./LCD/gui/debug.cyclo ./LCD/gui/debug.d ./LCD/gui/debug.o ./LCD/gui/debug.su ./LCD/gui/menu.cyclo ./LCD/gui/menu.d ./LCD/gui/menu.o ./LCD/gui/menu.su
+	-$(RM) ./LCD/gui/debug.d ./LCD/gui/debug.o ./LCD/gui/debug.su ./LCD/gui/menu.d ./LCD/gui/menu.o ./LCD/gui/menu.su
 
 .PHONY: clean-LCD-2f-gui
 

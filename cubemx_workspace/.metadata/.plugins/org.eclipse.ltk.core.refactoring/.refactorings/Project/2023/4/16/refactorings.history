@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;IR_Sensors&apos; to &apos;Project&apos;" description="Move &apos;IR_Sensors&apos; to &apos;Project&apos;" destination="/Project" element1="LCD/IR_Sensors" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1681715979650" updateReferences="true"/>
+</session>

@@ -1,10 +1,17 @@
-20:58:53 **** Incremental Build of configuration Debug for project Project ****
+15:30:38 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
+arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
+arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Project.elf
+ 
 arm-none-eabi-size   Project.elf 
+arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
    text	   data	    bss	    dec	    hex	filename
- 209352	   2040	  52160	 263552	  40580	Project.elf
+ 211088	   2056	  52304	 265448	  40ce8	Project.elf
 Finished building: default.size.stdout
  
+Finished building: Project.list
+ 
 
-20:58:55 Build Finished. 0 errors, 0 warnings. (took 2s.124ms)
+15:30:41 Build Finished. 0 errors, 0 warnings. (took 3s.454ms)
 

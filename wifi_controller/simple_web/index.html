@@ -54,9 +54,8 @@
         text-align: center;
     }
 </style>
-<script src="https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js"></script>
 <script>
-    var ip_address = "http://10.15.15.137:80";
+    var ip_address = "http://192.168.40.104:80";
     var interval;
     function button(ele){
         var x = ele.id;
@@ -80,10 +79,10 @@
     {
         document.getElementById(x).onmousedown = function(){
             interval = setInterval(function(){
-                fetch(ip_address,{
-                    method:"POST", body: "Direction: "+dir+"\n\n"
-                })
-            },1500)};
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "192.168.40.104/go?=" + dir, true);
+                xhr.send();
+            },800)};
         document.getElementById(x).onmouseup = function(){
             clearInterval(interval);
         };
