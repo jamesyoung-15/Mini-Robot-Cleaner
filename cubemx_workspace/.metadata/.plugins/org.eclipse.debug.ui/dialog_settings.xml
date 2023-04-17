@@ -5,4 +5,9 @@
 		<item key="DIALOG_HEIGHT" value="366"/>
 		<item key="DIALOG_FONT_NAME" value="1|Sans|10.0|0|GTK|1|"/>
 	</section>
+	<section name="org.eclipse.debug.ui.LAUNCH_CONFIGURATION_PROPERTIES_DIALOG_SECTION">
+		<item key="DIALOG_WIDTH" value="816"/>
+		<item key="DIALOG_HEIGHT" value="1248"/>
+		<item key="DIALOG_FONT_NAME" value="1|Sans|10.0|0|GTK|1|"/>
+	</section>
 </section>

@@ -27,8 +27,7 @@
 #include "../../LCD/lvgl/lv_port_disp.h"
 #include "../../LCD/lvgl/lv_port_indev.h"
 
-#include "../../LCD/lvgl/lvgl-v8.3/examples/lv_examples.h"
-#include "../../LCD/gui/debug.h"
+//#include "../../LCD/lvgl/lvgl-v8.3/examples/lv_examples.h"
 #include "../../LCD/gui/menu.h"
 
 // ESP header files
@@ -72,8 +71,9 @@ SRAM_HandleTypeDef hsram1;
 /* USER CODE BEGIN PV */
 
 // add network ssid and password here
-char network_name [] = "";
-char network_password[] = "";
+char network_name [] = "YangFamily";
+char network_password[] = "yang27764892";
+uint8_t car_mode = 0;
 
 /* USER CODE END PV */
 
@@ -128,25 +128,29 @@ int main(void)
   MX_CRC_Init();
   MX_TIM3_Init();
   MX_TIM1_Init();
+
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+
+  // ESP8266 Initialization
+  resetEsp(); // reset module just to make sure
+  echoOff(); // turn off at echo
+  HAL_Delay(200);
+  connectWifi(network_name,network_password); // connect to wifi
+  HAL_Delay(2000);
+
+
   //display and lvgl initialization
   lv_init(); //lvgl initialization
   lv_port_disp_init(); // lvgl display initialization
   lv_port_indev_init(); // lvgl touch initialization
-  set_screen();
-  debug_screen();
-  HAL_Delay(4000);
-//   menu_init();
+  setScreen();
+   menuInit();
+   HAL_Delay(1000);
 
 
-  // ESP8266 Initialization
-  resetEsp();
-  echoOff();
-  HAL_Delay(4000);
-  connectWifi(network_name,network_password); // connect to wifi
-  HAL_Delay(5000);
   checkIP();
+  printMode("Manual Mode");
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -154,70 +158,77 @@ int main(void)
   while (1)
   {
 	  lv_task_handler();
+	  // handles incoming HTTP requests other than robot directions
 	  if(request_receive)
 	  {
 		  serverHandler();
 		  request_receive = 0;
 	  }
-	  if(detect_left)
+
+	  // if manual mode of car is chosen, will listen for incoming HTTP requests with direction in header
+	  if(car_mode==0)
 	  {
-		  moveLeft();
-		  detect_left=0;
-	  }
-	  if(detect_right)
-	  {
-		  moveRight();
-		  detect_right=0;
-	  }
-	  if(detect_forward)
-	  {
-		  moveForward();
-		  detect_forward=0;
-	  }
-	  if(detect_backward)
-	  {
-		  moveBackward();
-		  detect_backward=0;
-	  }
-	  if(detect_forward_left)
-	  {
-		  moveForwardLeft();
-		  detect_forward_left=0;
-	  }
-	  if(detect_forward_right)
-	  {
-		  moveForwardRight();
-		  detect_forward_right=0;
-	  }
-	  if(detect_backward_left)
-	  {
-		  moveBackwardLeft();
-		  detect_backward_left=0;
-	  }
-	  if(detect_backward_right)
-	  {
-		  moveBackwardRight();
-		  detect_backward_right=0;
-	  }
-	  if(detect_stop)
-	  {
-		  stopMovement();
-		  detect_stop=0;
+		  if(detect_left)
+		  {
+			  moveLeft();
+			  detect_left=0;
+		  }
+		  if(detect_right)
+		  {
+			  moveRight();
+			  detect_right=0;
+		  }
+		  if(detect_forward)
+		  {
+			  moveForward();
+			  detect_forward=0;
+		  }
+		  if(detect_backward)
+		  {
+			  moveBackward();
+			  detect_backward=0;
+		  }
+		  if(detect_forward_left)
+		  {
+			  moveForwardLeft();
+			  detect_forward_left=0;
+		  }
+		  if(detect_forward_right)
+		  {
+			  moveForwardRight();
+			  detect_forward_right=0;
+		  }
+		  if(detect_backward_left)
+		  {
+			  moveBackwardLeft();
+			  detect_backward_left=0;
+		  }
+		  if(detect_backward_right)
+		  {
+			  moveBackwardRight();
+			  detect_backward_right=0;
+		  }
+		  if(detect_stop)
+		  {
+			  stopMovement();
+			  detect_stop=0;
+		  }
 	  }
 
+	  // button k1 to reconnect
 	  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==1)
 	  {
-		  print_debug("Reconnecting");
 		  resetEsp();
 		  connectWifi(network_name,network_password);
 		  HAL_Delay(200);
+		  checkIP();
 //		  showResponse();
 	  }
+	  // button k2 to recheck ip
 	  if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)==1)
 	  {
-		  checkIP();
-//		  checkAT();
-
+		   checkIP();
+//		  showResponse();
 	  }
 
 

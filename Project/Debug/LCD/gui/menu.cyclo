@@ -1,5 +1,6 @@
-menu.c:9:13:event_button	1
-menu.c:15:6:set_screen	1
-menu.c:22:6:debug_screen	1
-menu.c:39:6:menu_init	1
-menu.c:62:6:print_debug	1
+menu.c:40:6:setScreen	1
+menu.c:66:6:menuInit	1
+menu.c:130:6:printDebug	1
+menu.c:135:6:printIp	1
+menu.c:140:6:printMode	1
+menu.c:14:13:event_handler	3

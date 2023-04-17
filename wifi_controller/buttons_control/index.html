@@ -61,17 +61,17 @@
         var x = ele.id;
         switch(x){
             case '1':
-                move(x,'Forward');
+                move(x,'F-');
                 console.log(x);
                 break;
             case '2':
-                move(x,'Left');
+                move(x,'L-');
                 break;
             case '3':
-                move(x,'Right');
+                move(x,'R-');
                 break;
             case '4':
-                move(x,'Backward');
+                move(x,'B-');
                 break;
         }
     }
@@ -82,7 +82,7 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", "http://10.15.15.137/" + dir, true);
                 xhr.send();
-            },800)};
+            },1100)};
         document.getElementById(x).onmouseup = function(){
             clearInterval(interval);
         };

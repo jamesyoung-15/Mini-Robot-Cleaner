@@ -94,9 +94,10 @@
     }
     function send(dir)
     {
-        var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://"+ip_address+"/" + dir, true);
-            xhr.send();
+        fetch("http://"+ip_address+":80",
+        {
+            method: dir
+        });
     }
     var options = 
     {
@@ -112,7 +113,7 @@
     angle = 0;
     self.manager.on('start', function (event, nipple) 
     {
-        timer = setInterval(function() {move(angle,speed)},800);
+        timer = setInterval(function() {move(angle,speed)},1500);
     });
     self.manager.on('move', function (event, nipple) 
     {

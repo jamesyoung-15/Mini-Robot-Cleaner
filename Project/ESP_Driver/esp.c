@@ -2,7 +2,7 @@
 
 // Documentation: https://docs.espressif.com/projects/esp-at/en/latest/esp32/AT_Command_Set/Wi-Fi_AT_Commands.html#cmd-wstate
 
-#define RX_BUFFER_SIZE  2048
+#define RX_BUFFER_SIZE  512
 
 // Global Variables
 char buffer[RX_BUFFER_SIZE]; //Buffer for received response from ESP8266
@@ -21,7 +21,7 @@ uint8_t detect_stop = 0;
 
 char html_file[]=
 //"<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"test-area\"> <div class=\"top-row\"> <button class=\"button-style\" onclick=\"button(this)\" id=\"1\">UP</button> </div> <div class =\"bottom-row\"> <button class=\"button-style\" onclick=\"button(this)\" id=\"2\">LEFT</button> <button class=\"button-style\" onclick=\"button(this)\" id=\"3\">RIGHT</button> <button class=\"button-style\" onclick=\"button(this)\" id=\"4\">DOWN</button> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .button-style { margin: 15px; padding: 5px 20px; background-color: #0a0a23; color: #ffffff; } .test-area { margin: auto; width: 320px; text-align: center; } </style><script> var ip_address = \"http://192.168.40.104:80\"; var interval; function button(ele){ var x = ele.id; switch(x){ case '1': move(x,'F-'); console.log(x); break; case '2': move(x,'L-'); break; case '3': move(x,'R-'); break; case '4': move(x,'B-'); break; } } function move(x,dir) { document.getElementById(x).onmousedown = function(){ interval = setInterval(function(){ var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"/\" + dir, true); xhr.send(); },800)}; document.getElementById(x).onmouseup = function(){ clearInterval(interval); }; } </script> </html>";
-"<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"10.15.15.137\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},600); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>";
+"<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"10.15.15.137\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1100); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>";
 
 void sendData(char * command)
 {
@@ -36,7 +36,7 @@ void showResponse()
 {
 	char temp[RX_BUFFER_SIZE+100];
 	sprintf(temp,"Size: %d\n%s", strlen(buffer),buffer);
-	print_debug(temp);
+	printDebug(temp);
     clearReceivedBuffer();
 }
 
@@ -89,8 +89,7 @@ void connectWifi(char* ssid, char* passwd)
 	sendData(wifi_info);
 	HAL_Delay(5000);
 	clearReceivedBuffer();
-//	showResponse();
-//	HAL_Delay(1000);
+//	checkIP();
 }
 
 // sends HTTP response with some data to server
@@ -113,6 +112,19 @@ void sendResponse(char response[])
 	clearReceivedBuffer();
 }
 
+void testResponse()
+{
+	char resp[] = "HTTP/1.1 200 OK\r\n\r\n";
+	char at_command[50]={0};
+	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(resp));
+	sendData(at_command);
+	HAL_Delay(10);
+	sendData(resp);
+	HAL_Delay(10);
+	sendData("AT+CIPCLOSE=0\r\n");
+	clearReceivedBuffer();
+}
+
 // sends html file to server
 void sendWebsite()
 {
@@ -124,58 +136,9 @@ void sendWebsite()
 	HAL_Delay(100);
 	sendData("AT+CIPCLOSE=0\r\n");
 	HAL_Delay(100);
-	clearReceivedBuffer();
-}
-
-// web socket handshake response, abandon for now can't get it to work
-//void sendHandShake(char requestKey[])
-//{
-//	char response[400]={0};
-//	char returnKey[60]={0};
-//	print_debug(requestKey);
-//	generate_key(requestKey,returnKey);
-////	sprintf(printStuff,"%s \n %s",requestKey,returnKey);
-////	print_debug(printStuff);
-//	sprintf(response,"HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: %s\r\n\r\n",returnKey);
-////	print_debug(response);
 //	clearReceivedBuffer();
-//	char at_command[50] = {0};
-//	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(response));
-//	sendData(at_command);
-//	HAL_Delay(200);
-//	sendData(response);
-//	HAL_Delay(4000);
-//	sendData("AT+CIPCLOSE=0\r\n");
-//	HAL_Delay(100);
-//	clearReceivedBuffer();
-//
-//}
-
-uint8_t string_compare(char array1[], char array2[], uint16_t length)
-{
-	 uint16_t comVAR=0, i;
-	 for(i=0;i<length;i++)
-	   	{
-	   		  if(array1[i]==array2[i])
-	   	  		  comVAR++;
-	   	  	  else comVAR=0;
-	   	}
-	 if (comVAR==length)
-		 	return 1;
-	 else 	return 0;
 }
 
-int string_contains(char bufferArray[], char searchedString[], uint16_t length)
-{
-	uint8_t result=0;
-	for(uint16_t i=0; i<length; i++)
-	{
-		result = string_compare(&bufferArray[i], &searchedString[0], strlen(searchedString));
-		if(result == 1)
-			return i;
-	}
-	return -1;
-}
 
 
 // handles incoming requests
@@ -185,70 +148,86 @@ void serverHandler()
 	if(strstr(buffer,"GET")!=NULL && (strstr(buffer,"html"))!=NULL)
 	{
 		sendWebsite();
+		showResponse();
 		clearReceivedBuffer();
 	}
+//	testResponse();
+	else if(strstr(buffer,"GET")!=NULL && strstr(buffer,"getmode"))
+	{
+		clearReceivedBuffer();
+	}
+	clearReceivedBuffer();
 }
 
 void moveRight()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Right");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Right");
+	testResponse();
+//	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 void moveLeft()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Left");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Left");
+	testResponse();
+//	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void moveForward()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Forward");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Forward");
+	testResponse();
 }
 
 void moveBackward()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Backward");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Backward");
+	testResponse();
 }
 
 void moveBackwardLeft()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Backward Left");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Backward Left");
+	testResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void moveBackwardRight()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Backward Right");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Backward Right");
+	testResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void moveForwardRight()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Forward Right");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Forward Right");
+	testResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void moveForwardLeft()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Forward Left");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Forward Left");
+	testResponse();
+
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void stopMovement()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	print_debug("Stop Car");
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Stop Car");
+	testResponse();
+	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 // Query WIFI state, response: 0 not started, 1 connected but no IP, 2 connected and has IP, 3 connecting/reconnecting, 4 disconnect
@@ -264,7 +243,7 @@ void checkIP()
 {
 	sendData("AT+CIFSR\r\n");
 	HAL_Delay(100);
-	char temp[30]={0};
+	char temp[50]={0};
 	if(strstr(buffer,"STAIP")!=NULL)
 	{
 		char *find = strstr(buffer,"STAIP");
@@ -280,10 +259,16 @@ void checkIP()
 	}
 	else
 	{
-		sprintf(temp,"Error");
+		sprintf(temp,"Error Reading IP.");
 	}
-	sprintf(buffer,temp);
-	showResponse();
+	if(strstr(temp,"0.0.0.0")!=NULL)
+	{
+		sprintf(temp,"Error connecting.");
+	}
+	sprintf(buffer,"IP: %s", temp);
+	printIp(buffer);
+	clearReceivedBuffer();
+//	showResponse();
 }
 
 // Check list of available APs
@@ -301,6 +286,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
     	// check overflow
         if(buffer_index >= (RX_BUFFER_SIZE-1))
         {
+        	printDebug("Overflow");
         	clearReceivedBuffer();
         }
         // add character to buffer

@@ -251,7 +251,8 @@ ESP_Driver/esp.o: ../ESP_Driver/esp.c ../ESP_Driver/esp.h \
  ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/imgbtn/lv_imgbtn.h \
  ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/imgbtn/../../../lvgl.h \
  ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/lv_span.h \
- ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h
+ ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h
 ../ESP_Driver/esp.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -506,3 +507,4 @@ ESP_Driver/esp.o: ../ESP_Driver/esp.c ../ESP_Driver/esp.h \
 ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/imgbtn/../../../lvgl.h:
 ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/lv_span.h:
 ../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:

@@ -5,15 +5,12 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../LCD/gui/debug.c \
 ../LCD/gui/menu.c 
 
 OBJS += \
-./LCD/gui/debug.o \
 ./LCD/gui/menu.o 
 
 C_DEPS += \
-./LCD/gui/debug.d \
 ./LCD/gui/menu.d 
 
 
@@ -24,7 +21,7 @@ LCD/gui/%.o LCD/gui/%.su LCD/gui/%.cyclo: ../LCD/gui/%.c LCD/gui/subdir.mk
 clean: clean-LCD-2f-gui
 
 clean-LCD-2f-gui:
-	-$(RM) ./LCD/gui/debug.cyclo ./LCD/gui/debug.d ./LCD/gui/debug.o ./LCD/gui/debug.su ./LCD/gui/menu.cyclo ./LCD/gui/menu.d ./LCD/gui/menu.o ./LCD/gui/menu.su
+	-$(RM) ./LCD/gui/menu.cyclo ./LCD/gui/menu.d ./LCD/gui/menu.o ./LCD/gui/menu.su
 
 .PHONY: clean-LCD-2f-gui
 

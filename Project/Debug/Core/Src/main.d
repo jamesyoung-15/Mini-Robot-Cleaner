@@ -258,38 +258,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../../LCD/lvgl/lv_port_indev.h \
  ../Core/Src/../../LCD/lvgl/./lvgl-v8.3/lvgl.h \
  ../Core/Src/../../LCD/lvgl/../lcd_core/xpt2046.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/lv_examples.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/../lvgl.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/styles/lv_example_style.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/get_started/lv_example_get_started.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/widgets/lv_example_widgets.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/lv_example_layout.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/flex/lv_example_flex.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/grid/lv_example_grid.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/scroll/lv_example_scroll.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/event/lv_example_event.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/lv_example_others.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/snapshot/lv_example_snapshot.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/monkey/lv_example_monkey.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/gridnav/lv_example_gridnav.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/fragment/lv_example_fragment.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/imgfont/lv_example_imgfont.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/msg/lv_example_msg.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/ime/lv_example_ime_pinyin.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/lv_example_libs.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/bmp/lv_example_bmp.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/gif/lv_example_gif.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/png/lv_example_png.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/sjpg/lv_example_sjpg.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/qrcode/lv_example_qrcode.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/freetype/lv_example_freetype.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/rlottie/lv_example_rlottie.h \
- ../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h \
- ../Core/Src/../../LCD/gui/debug.h \
+ ../Core/Src/../../LCD/gui/menu.h \
  ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h \
- ../Core/Src/../../LCD/gui/menu.h ../Core/Src/../../ESP_Driver/esp.h \
- ../Core/Src/../../ESP_Driver/../LCD/gui/menu.h
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h \
+ ../Core/Src/../../ESP_Driver/esp.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -550,36 +523,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../../LCD/lvgl/lv_port_indev.h:
 ../Core/Src/../../LCD/lvgl/./lvgl-v8.3/lvgl.h:
 ../Core/Src/../../LCD/lvgl/../lcd_core/xpt2046.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/lv_examples.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/../lvgl.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/styles/lv_example_style.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/get_started/lv_example_get_started.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/widgets/lv_example_widgets.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/lv_example_layout.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/flex/lv_example_flex.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/layouts/grid/lv_example_grid.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/scroll/lv_example_scroll.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/anim/lv_example_anim.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/event/lv_example_event.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/lv_example_others.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/snapshot/lv_example_snapshot.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/monkey/lv_example_monkey.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/gridnav/lv_example_gridnav.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/fragment/lv_example_fragment.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/imgfont/lv_example_imgfont.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/msg/lv_example_msg.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/others/ime/lv_example_ime_pinyin.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/lv_example_libs.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/bmp/lv_example_bmp.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/gif/lv_example_gif.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/png/lv_example_png.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/sjpg/lv_example_sjpg.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/qrcode/lv_example_qrcode.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/freetype/lv_example_freetype.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/rlottie/lv_example_rlottie.h:
-../Core/Src/../../LCD/lvgl/lvgl-v8.3/examples/libs/ffmpeg/lv_example_ffmpeg.h:
-../Core/Src/../../LCD/gui/debug.h:
-../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
 ../Core/Src/../../LCD/gui/menu.h:
+../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h:
 ../Core/Src/../../ESP_Driver/esp.h:
-../Core/Src/../../ESP_Driver/../LCD/gui/menu.h:
