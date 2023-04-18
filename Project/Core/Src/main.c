@@ -71,8 +71,8 @@ SRAM_HandleTypeDef hsram1;
 /* USER CODE BEGIN PV */
 
 // add network ssid and password here
-char network_name [] = "YangFamily";
-char network_password[] = "yang27764892";
+char network_name [] = "";
+char network_password[] = "";
 uint8_t car_mode = 0;
 
 /* USER CODE END PV */
