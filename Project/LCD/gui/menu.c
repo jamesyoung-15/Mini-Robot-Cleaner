@@ -127,10 +127,13 @@ void menuInit()
 
 }
 
+
 void printDebug(char* msg)
 {
 	lv_label_set_text(debug_label,msg);
 }
+
+
 
 void printIp(char* ip)
 {

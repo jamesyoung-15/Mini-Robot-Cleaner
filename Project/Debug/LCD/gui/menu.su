@@ -1,6 +1,6 @@
 ../LCD/gui/menu.c:40:6:setScreen	8	static
 ../LCD/gui/menu.c:66:6:menuInit	32	static
-../LCD/gui/menu.c:130:6:printDebug	8	static
-../LCD/gui/menu.c:135:6:printIp	8	static
-../LCD/gui/menu.c:140:6:printMode	8	static
+../LCD/gui/menu.c:131:6:printDebug	8	static
+../LCD/gui/menu.c:138:6:printIp	8	static
+../LCD/gui/menu.c:143:6:printMode	8	static
 ../LCD/gui/menu.c:14:13:event_handler	8	static

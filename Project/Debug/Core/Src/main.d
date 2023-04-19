@@ -262,7 +262,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h \
- ../Core/Src/../../ESP_Driver/esp.h
+ ../Core/Src/../../ESP_Driver/esp.h ../Core/Inc/lcdtp.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -528,3 +528,4 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h:
 ../Core/Src/../../ESP_Driver/esp.h:
+../Core/Inc/lcdtp.h:

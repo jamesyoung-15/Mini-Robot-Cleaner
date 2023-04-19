@@ -70,7 +70,7 @@ def moveBackwardLeft():
     send("BL--")
     time.sleep(delay)
 
-# turn off echo
+# turn off echo for cleaner input screen
 os.system("stty -echo")
 
 # keyboard input
@@ -79,10 +79,11 @@ keyboard.add_hotkey('a', moveLeft)
 keyboard.add_hotkey('s', moveBackward)
 keyboard.add_hotkey('d', moveRight)
 keyboard.add_hotkey('k', stop)
-keyboard.add_hotkey('w+d', moveForwardRight)
-keyboard.add_hotkey('w+a', moveForwardLeft)
-keyboard.add_hotkey('s+d', moveBackwardRight)
-keyboard.add_hotkey('s+a', moveBackwardLeft)
+
+# keyboard.add_hotkey('w+d', moveForwardRight)
+# keyboard.add_hotkey('w+a', moveForwardLeft)
+# keyboard.add_hotkey('s+d', moveBackwardRight)
+# keyboard.add_hotkey('s+a', moveBackwardLeft)
 
 # on release stop
 keyboard.on_release(stop)
@@ -92,6 +93,6 @@ print("Press WASD controls for robot")
 print("Press ESC to stop.")
 keyboard.wait('esc')
 
-# turn on echo again, for unix systems
+# turn on echo again
 os.system("stty echo")
 
