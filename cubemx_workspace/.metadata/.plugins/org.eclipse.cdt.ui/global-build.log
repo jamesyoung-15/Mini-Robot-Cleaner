@@ -1,4 +1,34 @@
-05:12:33 **** Incremental Build of configuration Debug for project Project ****
+06:42:28 **** Incremental Build of configuration Debug for project Project ****
+make -j16 all 
+arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../ESP_Driver/esp.c: In function 'setHTMLFile':
+../ESP_Driver/esp.c:258:537: warning: unknown conversion type character ';' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+../ESP_Driver/esp.c:258:1591: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^~
+../ESP_Driver/esp.c:258:1604: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:146:3: warning: implicit declaration of function 'createUDPServer'; did you mean 'createTCPServer'? [-Wimplicit-function-declaration]
+  146 |   createUDPServer();
+      |   ^~~~~~~~~~~~~~~
+      |   createTCPServer
+arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Project.elf
+ 
+arm-none-eabi-size   Project.elf 
+arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
+   text	   data	    bss	    dec	    hex	filename
+ 206156	    524	  53780	 260460	  3f96c	Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Project.list
+ 
+06:42:58 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
 arm-none-eabi-gcc "../LCD/gui/menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"LCD/gui/menu.d" -MT"LCD/gui/menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "LCD/gui/menu.o"
 arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
@@ -11,17 +41,42 @@ In file included from ../LCD/gui/menu.c:1:
 ../LCD/gui/menu.h:16:22: note: expected 'char *' but argument is of type 'const char *'
    16 | void printMode(char* mode);
       |                ~~~~~~^~~~
-../Core/Src/main.c:31:10: fatal error: ../../LCD/gui/debug.h: No such file or directory
-   31 | #include "../../LCD/gui/debug.h"
-      |          ^~~~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-make: *** [Core/Src/subdir.mk:34: Core/Src/main.o] Error 1
-make: *** Waiting for unfinished jobs....
-"make -j16 all" terminated with exit code 2. Build might be incomplete.
-
-05:12:35 Build Failed. 3 errors, 1 warnings. (took 2s.473ms)
-
-05:12:47 **** Incremental Build of configuration Debug for project Project ****
+../ESP_Driver/esp.c: In function 'setHTMLFile':
+../ESP_Driver/esp.c:258:537: warning: unknown conversion type character ';' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+../ESP_Driver/esp.c:258:1591: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^~
+../ESP_Driver/esp.c:258:1604: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^~
+arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Project.elf
+ 
+arm-none-eabi-size   Project.elf 
+arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
+   text	   data	    bss	    dec	    hex	filename
+ 206156	    524	  53780	 260460	  3f96c	Project.elf
+Finished building: default.size.stdout
+ 
+Finished building: Project.list
+ 
+06:44:00 **** Incremental Build of configuration Debug for project Project ****
+make -j16 all 
+arm-none-eabi-size   Project.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 206156	    524	  53780	 260460	  3f96c	Project.elf
+Finished building: default.size.stdout
+ 
+06:44:05 **** Incremental Build of configuration Debug for project Project ****
+make -j16 all 
+arm-none-eabi-size   Project.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 206156	    524	  53780	 260460	  3f96c	Project.elf
+Finished building: default.size.stdout
+ 
+06:45:34 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -30,325 +85,70 @@ Finished building target: Project.elf
 arm-none-eabi-size   Project.elf 
 arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
    text	   data	    bss	    dec	    hex	filename
- 205932	   2516	  51220	 259668	  3f654	Project.elf
+ 206168	    524	  53780	 260472	  3f978	Project.elf
 Finished building: default.size.stdout
  
 Finished building: Project.list
  
-05:17:38 **** Incremental Build of configuration Debug for project Project ****
+06:50:20 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
 arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../ESP_Driver/esp.c: In function 'setHTMLFile':
+../ESP_Driver/esp.c:258:537: warning: unknown conversion type character ';' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+../ESP_Driver/esp.c:258:1591: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^~
+../ESP_Driver/esp.c:258:1604: warning: unknown conversion type character '"' in format [-Wformat=]
+  258 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^~
 arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Project.elf
  
 arm-none-eabi-size   Project.elf 
 arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
    text	   data	    bss	    dec	    hex	filename
- 205932	   2516	  51220	 259668	  3f654	Project.elf
+ 206172	    524	  53780	 260476	  3f97c	Project.elf
 Finished building: default.size.stdout
  
 Finished building: Project.list
  
-05:20:33 **** Incremental Build of configuration Debug for project Project ****
+06:53:42 **** Incremental Build of configuration Debug for project Project ****
+make -j16 all 
+arm-none-eabi-size   Project.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 206172	    524	  53780	 260476	  3f97c	Project.elf
+Finished building: default.size.stdout
+ 
+06:53:59 **** Incremental Build of configuration Debug for project Project ****
+make -j16 all 
+arm-none-eabi-size   Project.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 206172	    524	  53780	 260476	  3f97c	Project.elf
+Finished building: default.size.stdout
+ 
+07:01:04 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
 arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
+../ESP_Driver/esp.c: In function 'setHTMLFile':
+../ESP_Driver/esp.c:266:537: warning: unknown conversion type character ';' in format [-Wformat=]
+  266 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+../ESP_Driver/esp.c:266:1591: warning: unknown conversion type character '"' in format [-Wformat=]
+  266 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^~
+../ESP_Driver/esp.c:266:1604: warning: unknown conversion type character '"' in format [-Wformat=]
+  266 |     "<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"%s\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>",
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^~
 arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Project.elf
  
 arm-none-eabi-size   Project.elf 
 arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
    text	   data	    bss	    dec	    hex	filename
- 206076	   2516	  51220	 259812	  3f6e4	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-05:41:06 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206144	   2516	  51220	 259880	  3f728	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-05:43:09 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206144	   2516	  51220	 259880	  3f728	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-05:45:08 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206140	   2516	  51220	 259876	  3f724	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-05:48:20 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206148	   2516	  51220	 259884	  3f72c	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:12:03 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206116	   2516	  50708	 259340	  3f50c	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:14:25 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206116	   2516	  50708	 259340	  3f50c	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:16:59 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206112	   2516	  50708	 259336	  3f508	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:20:32 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206176	   2516	  50708	 259400	  3f548	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:21:50 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-size   Project.elf 
-   text	   data	    bss	    dec	    hex	filename
- 206176	   2516	  50708	 259400	  3f548	Project.elf
-Finished building: default.size.stdout
- 
-06:24:01 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206144	   2516	  50708	 259368	  3f528	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:26:01 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:27:54 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:30:40 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:34:48 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206164	   2516	  50708	 259388	  3f53c	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:36:25 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:39:04 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:40:38 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:42:22 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:44:17 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:47:19 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206156	   2516	  50708	 259380	  3f534	Project.elf
-Finished building: default.size.stdout
- 
-Finished building: Project.list
- 
-06:54:52 **** Incremental Build of configuration Debug for project Project ****
-make -j16 all 
-arm-none-eabi-gcc "../ESP_Driver/esp.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"ESP_Driver/esp.d" -MT"ESP_Driver/esp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "ESP_Driver/esp.o"
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
-arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
-   text	   data	    bss	    dec	    hex	filename
- 206188	   2516	  50708	 259412	  3f554	Project.elf
+ 206016	    524	  53780	 260320	  3f8e0	Project.elf
 Finished building: default.size.stdout
  
 Finished building: Project.list

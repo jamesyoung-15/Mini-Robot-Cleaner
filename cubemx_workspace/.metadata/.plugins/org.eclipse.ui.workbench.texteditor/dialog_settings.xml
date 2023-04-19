@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="800"/>
+		<item key="selection" value="okResponse"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="800"/>
-			<item value="1000"/>
-			<item value="700"/>
-			<item value="600"/>
-			<item value="1200"/>
-			<item value="1500"/>
-			<item value="testresp"/>
-			<item value="1400"/>
-			<item value="checkip"/>
-			<item value="sendwe"/>
-			<item value="sendrec"/>
-			<item value="send"/>
-			<item value="html"/>
-			<item value="testres"/>
+			<item value="okresponse"/>
+			<item value="okRespon"/>
+			<item value="testrespon"/>
+			<item value="long"/>
+			<item value="\;"/>
+			<item value="mqtt"/>
+			<item value="showRespo"/>
+			<item value="ip_ad"/>
+			<item value="192."/>
 			<item value="test"/>
+			<item value="10."/>
+			<item value="testResponse"/>
+			<item value="ip_add"/>
+			<item value="ip_a"/>
+			<item value="800"/>
 		</list>
 		<list key="replacehistory">
+			<item value="okResponse"/>
 			<item value="printDebug"/>
 			<item value="tab1_obj1"/>
 			<item value="huart3"/>

@@ -74,6 +74,11 @@ SRAM_HandleTypeDef hsram1;
 char network_name [] = "";
 char network_password[] = "";
 uint8_t car_mode = 0;
+char mac_address[] = "";
+// ip address of server if needed
+//char ip_address[] = "10.15.15.63";
+// topic name for mqtt
+//char topic_name[] = "robot/direction";
 
 /* USER CODE END PV */
 
@@ -134,9 +139,11 @@ int main(void)
 
   // ESP8266 Initialization
   resetEsp(); // reset module just to make sure
-  echoOff(); // turn off at echo
+//  echoOff(); // turn off at echo
   HAL_Delay(200);
   connectWifi(network_name,network_password); // connect to wifi
+//  createTCPServer(); // create tcp server
+//  setHTMLFile(ip_address); // set html file stuff
   HAL_Delay(2000);
 
 
@@ -151,6 +158,10 @@ int main(void)
 
   checkIP();
   printMode("Manual Mode");
+  createUDPServer();
+//  connectMQTT(ip_address);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -220,6 +231,8 @@ int main(void)
 	  {
 		  resetEsp();
 		  connectWifi(network_name,network_password);
+		  HAL_Delay(200);
+		  createUDPServer();
 		  HAL_Delay(200);
 		  checkIP();
 //		  showResponse();
