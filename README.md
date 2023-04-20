@@ -10,7 +10,7 @@ Ongoing ELEC3300 course project for a robot car cleaner. The robot has 2 modes w
 
 Quick demo of our progress on interim demo day: 
 
-![](https://github.com/jamesyoung-15/ELEC3300-Project/resources/interim-demo/interim-demo.gif)
+![](https://github.com/jamesyoung-15/ELEC3300-Project/blob/main/resources/interim-demo-progress/interim-demo.gif)
 
 # Todo:
 - Add motor cleaner to robot car
