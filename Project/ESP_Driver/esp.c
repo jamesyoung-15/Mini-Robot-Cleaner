@@ -411,6 +411,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			{
 				detect_stop = 1;
 			}
+        	if(buffer[buffer_index-2]=='C' && buffer[buffer_index-1]=='M' && buffer[buffer_index]=='-')
+        	{
+        		car_mode = 0;
+        	}
 
         }
 

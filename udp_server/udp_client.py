@@ -14,15 +14,17 @@ buffer_size = 2048 # buffer size 2048 as input works for most purposes
 # create client's socket
 clientSocket = socket(AF_INET, SOCK_DGRAM) #af_inet indicates ipv4, sockdram indicates udp
 
-delay = 0.25
 
 # send string param message via UDP
 def send(message):
     # send message through socket to destination host
     clientSocket.sendto(message.encode(),(serverName, serverPort))
+    
+
+def receive():
     # when packet arrives at client's socket, packet's data is put into modifiedMessage and packet's source is put to serverAddress
-    # modifiedMessage, serverAddress = clientSocket.recvfrom(buffer_size)
-    # print(modifiedMessage.decode())
+    receivedMessage, serverAddress = clientSocket.recvfrom(buffer_size)
+    print(receivedMessage.decode())
 
 
 # move car functions by sending udp transmission
@@ -67,8 +69,15 @@ def moveBackwardRight():
     time.sleep(delay)
 
 def moveBackwardLeft():
-    send("BL--")
+    send("BL-")
     time.sleep(delay)
+
+def stopAutomatic():
+    print('p')
+    send("CM-")
+
+# delay so that it's sending data to frequently
+delay = 0.25
 
 # turn off echo for cleaner input screen
 os.system("stty -echo")
@@ -79,6 +88,7 @@ keyboard.add_hotkey('a', moveLeft)
 keyboard.add_hotkey('s', moveBackward)
 keyboard.add_hotkey('d', moveRight)
 keyboard.add_hotkey('k', stop)
+keyboard.add_hotkey('p', stopAutomatic)
 
 keyboard.add_hotkey('w+d', moveForwardRight)
 keyboard.add_hotkey('w+a', moveForwardLeft)

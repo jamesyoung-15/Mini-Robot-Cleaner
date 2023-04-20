@@ -17,7 +17,7 @@
 extern UART_HandleTypeDef huart3;
 extern uint8_t single_buffer;
 
-// sent data handle variables
+// extern sent data handle variables
 extern uint8_t request_receive;
 extern uint8_t detect_left;
 extern uint8_t detect_right;
@@ -29,6 +29,8 @@ extern uint8_t detect_backward_right;
 extern uint8_t detect_backward_left;
 extern uint8_t detect_stop;
 
+// extern variable for changing mode
+extern uint8_t car_mode;
 // Functions
 
 // uart functions

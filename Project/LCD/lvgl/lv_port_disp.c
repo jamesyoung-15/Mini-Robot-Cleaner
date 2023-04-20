@@ -205,7 +205,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 		ILI9341_OpenWindow2(area->x1,area->y1,area->x2,area->y2);
 		uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
 		HAL_StatusTypeDef DMA_status = HAL_ERROR;
-		// start dma transfer, parameters: pointer to dma channel, data, destination buffer address, size of data
+		// start dma transfer, parameters: pointer to dma channel, data, destination buffer address, size of data, send to 0x60020000 (FSMC ILI9341 data address)
 		HAL_DMA_Start(&hdma_memtomem_dma1_channel1,(uint32_t)color_p,(uint32_t)0x60020000,size);
 		HAL_DMA_PollForTransfer(&hdma_memtomem_dma1_channel1, HAL_DMA_FULL_TRANSFER, 100);
 	}

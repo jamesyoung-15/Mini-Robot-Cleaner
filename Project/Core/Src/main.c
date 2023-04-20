@@ -64,6 +64,7 @@
 /* Private variables ---------------------------------------------------------*/
 CRC_HandleTypeDef hcrc;
 
+TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
@@ -77,11 +78,11 @@ SRAM_HandleTypeDef hsram1;
 /* USER CODE BEGIN PV */
 
 // add network ssid and password here
-char network_name [] = "YangFamily";
-char network_password[] = "yang27764892";
-uint8_t car_mode = 0;
-// ip address of server if needed
-char ip_address[] = "10.15.15.137";
+char network_name [] = "";
+char network_password[] = "";
+uint8_t car_mode = 0; // 0 is manual, 1 is automatic
+// ip address of server if needed, not needed for now
+// char ip_address[] = "";
 // topic name for mqtt
 //char topic_name[] = "robot/direction";
 
@@ -96,6 +97,7 @@ static void MX_USART3_UART_Init(void);
 static void MX_CRC_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -142,11 +144,13 @@ int main(void)
   MX_CRC_Init();
   MX_TIM3_Init();
   MX_TIM2_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
   // initialize timer for ultrasonic sensors
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_Base_Start_IT(&htim1);
 
   // ESP8266 Initialization
   resetEsp(); // reset module just to make sure
@@ -185,10 +189,17 @@ int main(void)
 		  request_receive = 0;
 	  }
 
-	  char sensorData[100];
+  // Sensor data handling
+
+	  char sensorData[100]; // for printing to screen
+    // get 3 sensor data
 	  uint32_t front_middle= HC_SR04_U1();
-//	  uint32_t right_sensor = HC_SR04_U2();
-	  sprintf(sensorData,"Sensor Front Mid: %lu\nSensor Front L: %lu Sensor Front R: %lu\nSensor Back: %lu",front_middle,0,0,0);
+//	  uint32_t front_middle=0;
+	  uint32_t left_sensor = HC_SR04_U2();
+//	  uint32_t left_sensor =0;
+	  uint32_t right_sensor = HC_SR04_U3();
+//	  uint32_t right_sensor=0;
+	  sprintf(sensorData,"Sensor Front Mid: %lu\nSensor Front L: %lu\nSensor Front R: %lu",front_middle,left_sensor,right_sensor);
 	  printUltrasonicSensor(sensorData);
 
 
@@ -269,11 +280,11 @@ int main(void)
 		  // otherwise, move backward and turn right
 		  else if(front_middle<=14)
 		  {
-			  // stop for half a second, move backward for half a second
+			  // stop for half a second, move backward for some milliseconds
 			  stopMovement();
 			  HAL_Delay(500);
 			  moveBackwardRight();
-			  HAL_Delay(500);
+			  HAL_Delay(400);
 			  prev_move = 4;
 		  }
 
@@ -367,6 +378,52 @@ static void MX_CRC_Init(void)
   /* USER CODE BEGIN CRC_Init 2 */
 
   /* USER CODE END CRC_Init 2 */
+
+}
+
+/**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 72-1;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 65535;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
 
 }
 
@@ -564,6 +621,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_9|GPIO_PIN_11, GPIO_PIN_RESET);
+
   /*Configure GPIO pins : PE2 PE0 PE1 */
   GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_0|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -583,8 +643,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PC13 */
-  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  /*Configure GPIO pins : PC13 PC7 PC10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_7|GPIO_PIN_10;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
@@ -619,6 +679,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PC9 PC11 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_11;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
