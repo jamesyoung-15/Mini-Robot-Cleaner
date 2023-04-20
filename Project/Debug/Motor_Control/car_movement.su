@@ -1,0 +1,9 @@
+../Motor_Control/car_movement.c:4:6:moveRight	8	static
+../Motor_Control/car_movement.c:14:6:moveLeft	8	static
+../Motor_Control/car_movement.c:25:6:moveForward	8	static
+../Motor_Control/car_movement.c:40:6:moveBackward	8	static
+../Motor_Control/car_movement.c:53:6:stopMovement	8	static
+../Motor_Control/car_movement.c:70:6:moveBackwardLeft	8	static
+../Motor_Control/car_movement.c:82:6:moveBackwardRight	8	static
+../Motor_Control/car_movement.c:93:6:moveForwardRight	8	static
+../Motor_Control/car_movement.c:101:6:moveForwardLeft	8	static

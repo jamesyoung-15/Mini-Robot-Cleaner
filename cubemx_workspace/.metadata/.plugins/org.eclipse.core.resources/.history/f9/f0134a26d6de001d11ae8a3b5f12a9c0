@@ -1,0 +1,83 @@
+#include "car_movement.h"
+
+
+void moveRight()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Right");
+//	okResponse();
+//	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+void moveLeft()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Left");
+//	okResponse();
+//	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void moveForward()
+{
+	printDebug("Forward");
+
+	// left motor
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
+
+//	// right motor
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_RESET);
+//	okResponse();
+}
+
+void moveBackward()
+{
+	printDebug("Backward");
+//	okResponse();
+}
+
+void moveBackwardLeft()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Backward Left");
+//	okResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void moveBackwardRight()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Backward Right");
+//	okResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void moveForwardRight()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Forward Right");
+//	okResponse();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void moveForwardLeft()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Forward Left");
+//	okResponse();
+
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void stopMovement()
+{
+//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	printDebug("Stop Car");
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
+//	okResponse();
+	clearReceivedBuffer();
+//	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}

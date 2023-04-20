@@ -5,7 +5,7 @@ lv_obj_t * ui_menu;
 lv_obj_t * debug_label;
 lv_obj_t* ip_label;
 lv_obj_t* mode_label;
-
+lv_obj_t* ultrasonic_sensor_label;
 
 // for button matrix
 static const char* button_map[] = {"Automatic Mode","\n","Manual Mode",""};
@@ -114,13 +114,25 @@ void menuInit()
 
 
 	// Tab 3 printing string section for debugging
-	lv_obj_t * tab3_obj = lv_obj_create(tab3); // create object for text
-	lv_obj_set_size(tab3_obj,200,200);
-	lv_obj_align(tab3_obj,LV_ALIGN_CENTER,0,0);
-	lv_obj_set_style_bg_color(tab3_obj,lv_color_hex(0x44475a),0);
-	lv_obj_set_style_border_opa(tab3_obj,LV_OPA_TRANSP,0);
-	debug_label = lv_label_create(tab3_obj);
+
+	// ultra sonic sensor data
+	lv_obj_t * tab3_obj1 = lv_obj_create(tab3); // create object for text
+	lv_obj_set_size(tab3_obj1,220,70);
+	lv_obj_align(tab3_obj1,LV_ALIGN_TOP_MID,0,0);
+	lv_obj_set_style_bg_color(tab3_obj1,lv_color_hex(0x44475a),0);
+	ultrasonic_sensor_label = lv_label_create(tab3_obj1);
+	lv_obj_set_style_text_color(ultrasonic_sensor_label,lv_color_hex(0xf8f8f2),0);
+	lv_obj_set_style_text_font(ultrasonic_sensor_label,&lv_font_montserrat_10,0);
+
+	// other debug area
+	lv_obj_t * tab3_obj2 = lv_obj_create(tab3); // create object for text
+	lv_obj_set_size(tab3_obj2,220,150);
+	lv_obj_align(tab3_obj2,LV_ALIGN_CENTER,0,30);
+	lv_obj_set_style_bg_color(tab3_obj2,lv_color_hex(0x44475a),0);
+	lv_obj_set_style_border_opa(tab3_obj2,LV_OPA_TRANSP,0);
+	debug_label = lv_label_create(tab3_obj2);
 	lv_obj_set_style_text_color(debug_label,lv_color_hex(0xf8f8f2),0);
+	lv_obj_set_style_text_font(debug_label,&lv_font_montserrat_12,0);
 	lv_label_set_text(debug_label,"Debugging area");
 
 
@@ -128,12 +140,16 @@ void menuInit()
 }
 
 
+
 void printDebug(char* msg)
 {
 	lv_label_set_text(debug_label,msg);
 }
 
-
+void printUltrasonicSensor(char* msg)
+{
+	lv_label_set_text(ultrasonic_sensor_label,msg);
+}
 
 void printIp(char* ip)
 {

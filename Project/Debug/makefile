@@ -9,6 +9,8 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include UltraSonic_Sensors/subdir.mk
+-include Motor_Control/subdir.mk
 -include LCD/lvgl/lvgl-v8.3/tests/unity/subdir.mk
 -include LCD/lvgl/lvgl-v8.3/tests/src/test_fonts/subdir.mk
 -include LCD/lvgl/lvgl-v8.3/tests/src/test_cases/subdir.mk

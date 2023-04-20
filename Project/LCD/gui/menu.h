@@ -16,5 +16,6 @@ void menuInit();
 void printMode(char* mode);
 void printIp(char* ip);
 void printDebug(char* msg);
+void printUltrasonicSensor(char* msg);
 char* getModeString();
 #endif

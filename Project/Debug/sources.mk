@@ -9,6 +9,7 @@ S_SRCS :=
 C_SRCS := 
 S_UPPER_SRCS := 
 O_SRCS := 
+CYCLO_FILES := 
 SIZE_OUTPUT := 
 OBJDUMP_LIST := 
 SU_FILES := 
@@ -153,4 +154,6 @@ LCD/lvgl/lvgl-v8.3/tests/src \
 LCD/lvgl/lvgl-v8.3/tests/src/test_cases \
 LCD/lvgl/lvgl-v8.3/tests/src/test_fonts \
 LCD/lvgl/lvgl-v8.3/tests/unity \
+Motor_Control \
+UltraSonic_Sensors \
 

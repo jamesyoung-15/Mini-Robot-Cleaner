@@ -26,17 +26,23 @@
 #include "../../LCD/lvgl/lvgl-v8.3/lvgl.h"
 #include "../../LCD/lvgl/lv_port_disp.h"
 #include "../../LCD/lvgl/lv_port_indev.h"
+#include "../../UltraSonic_Sensors/HC_SR04.h"
 
 //#include "../../LCD/lvgl/lvgl-v8.3/examples/lv_examples.h"
 #include "../../LCD/gui/menu.h"
 
 // ESP header files
 #include "../../ESP_Driver/esp.h"
-#include "lcdtp.h"
-// others
+
+// ultrasonic sensor
+#include "../../UltraSonic_Sensors/HC_SR04.h"
+
+// motors
+#include "../../Motor_Control/car_movement.h"
+
+// C library
 #include "string.h"
 #include <stdio.h>
-// ultrasonic sensor
 
 
 /* USER CODE END Includes */
@@ -71,12 +77,11 @@ SRAM_HandleTypeDef hsram1;
 /* USER CODE BEGIN PV */
 
 // add network ssid and password here
-char network_name [] = "Pixel_7670";
-char network_password[] = "xq7tsx78";
+char network_name [] = "YangFamily";
+char network_password[] = "yang27764892";
 uint8_t car_mode = 0;
-char mac_address[] = "";
 // ip address of server if needed
-//char ip_address[] = "10.15.15.63";
+char ip_address[] = "10.15.15.137";
 // topic name for mqtt
 //char topic_name[] = "robot/direction";
 
@@ -98,38 +103,6 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-uint32_t HC_SR04_U1 ( void )
-{
-	/* Set TRIG On */
-	HAL_GPIO_WritePin (GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	HAL_Delay(15);
-	HAL_GPIO_WritePin (GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-	/* wait for echo signal is off */
-	while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_6) == GPIO_PIN_RESET);
-	/* measure time while high */
-	__HAL_TIM_SET_COUNTER(&htim3,0);
-	while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_6) == GPIO_PIN_SET);
-	uint16_t counter1 = __HAL_TIM_GET_COUNTER(&htim3);
-	/* calculate distance(cm) */
-	uint32_t dis1 = counter1 * .034 / 2;
-	return dis1;
-//	printDebug(d1);
-}
-
-uint32_t HC_SR04_U2 ( void ){
-	//Second sensor
-	uint32_t dis2 = 0;
-	HAL_GPIO_WritePin (GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-	HAL_Delay(15);
-	HAL_GPIO_WritePin (GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-	while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_7) == GPIO_PIN_RESET);
-	__HAL_TIM_SET_COUNTER(&htim2,0);
-	while(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_7) == GPIO_PIN_SET);
-	uint16_t counter2 = __HAL_TIM_GET_COUNTER(&htim2);
-	dis2 = counter2 * .034 / 2;
-	return dis2;
-}
-
 
 
 /* USER CODE END 0 */
@@ -141,7 +114,8 @@ uint32_t HC_SR04_U2 ( void ){
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+	// store the previous car movement direction (0 stop, 1 foward, 2 left, 3 right, 4 backward)
+	uint8_t prev_move =0;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -179,8 +153,7 @@ int main(void)
 //  echoOff(); // turn off at echo
   HAL_Delay(200);
   connectWifi(network_name,network_password); // connect to wifi
-//  createTCPServer(); // create tcp server
-//  setHTMLFile(ip_address); // set html file stuff
+  createTCPServer(); // create tcp server
   HAL_Delay(2000);
 
 
@@ -205,7 +178,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  lv_task_handler();
 	  // handles incoming HTTP requests other than robot directions
 	  if(request_receive)
 	  {
@@ -213,28 +185,49 @@ int main(void)
 		  request_receive = 0;
 	  }
 
-	  // if manual mode of car is chosen, will listen for incoming HTTP requests with direction in header
+	  char sensorData[100];
+	  uint32_t front_middle= HC_SR04_U1();
+//	  uint32_t right_sensor = HC_SR04_U2();
+	  sprintf(sensorData,"Sensor Front Mid: %lu\nSensor Front L: %lu Sensor Front R: %lu\nSensor Back: %lu",front_middle,0,0,0);
+	  printUltrasonicSensor(sensorData);
+
+
+	  // if manual mode of car is chosen, will listen for incoming UDP transmissions with direction in header, also safety check with sensor data
 	  if(car_mode==0)
 	  {
 		  if(detect_left)
 		  {
 			  moveLeft();
 			  detect_left=0;
+			  prev_move=2;
+			  clearReceivedBuffer();
 		  }
 		  if(detect_right)
 		  {
 			  moveRight();
 			  detect_right=0;
+			  prev_move=3;
 		  }
-		  if(detect_forward)
+		  // if direction sensor gets echo from obstacle closeby, stop
+		  if(prev_move==1 && front_middle<12)
+		  {
+			  stopMovement();
+			  prev_move=0;
+			  detect_forward=0;
+			  detect_stop=0;
+		  }
+		  // otherwise move to that direction if told to
+		  else if(detect_forward && front_middle>=12)
 		  {
 			  moveForward();
 			  detect_forward=0;
+			  prev_move=1;
 		  }
 		  if(detect_backward)
 		  {
 			  moveBackward();
 			  detect_backward=0;
+			  prev_move=4;
 		  }
 		  if(detect_forward_left)
 		  {
@@ -260,7 +253,30 @@ int main(void)
 		  {
 			  stopMovement();
 			  detect_stop=0;
+			  prev_move=0;
 		  }
+	  }
+	  // automatic mode, will use wall follower right hand rule (https://en.wikipedia.org/wiki/Maze-solving_algorithm)
+	  else if(car_mode==1)
+	  {
+
+		  // if no obstacles ahead, keep driving forward
+		  if(front_middle>14)
+		  {
+			  moveForward();
+			  prev_move = 1;
+		  }
+		  // otherwise, move backward and turn right
+		  else if(front_middle<=14)
+		  {
+			  // stop for half a second, move backward for half a second
+			  stopMovement();
+			  HAL_Delay(500);
+			  moveBackwardRight();
+			  HAL_Delay(500);
+			  prev_move = 4;
+		  }
+
 	  }
 
 	  // button k1 to reconnect
@@ -272,22 +288,15 @@ int main(void)
 		  createUDPServer();
 		  HAL_Delay(200);
 		  checkIP();
-//		  showResponse();
 	  }
 	  // button k2 to recheck ip
 	  if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)==1)
 	  {
-//		  HC_SR04_U2();
 		   checkIP();
-//		  showResponse();
 	  }
-//	  char sensorData[30];
-//	  uint32_t left_sensor= HC_SR04_U1();
-//	  uint32_t right_sensor = HC_SR04_U2();
-//	  sprintf(sensorData,"Sensor left: %li\n Sensor right: %li",left_sensor, right_sensor);
-//	  printDebug(sensorData);
 
 
+	  lv_task_handler();
 
     /* USER CODE END WHILE */
 
@@ -546,9 +555,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_12|GPIO_PIN_13
-                          |GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_5|GPIO_PIN_8
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5|GPIO_PIN_8
                           |GPIO_PIN_9, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
@@ -591,20 +602,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 PB1 PB5 PB8
+  /*Configure GPIO pins : PB0 PB1 PB12 PB13
+                           PB14 PB15 PB5 PB8
                            PB9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_5|GPIO_PIN_8
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_12|GPIO_PIN_13
+                          |GPIO_PIN_14|GPIO_PIN_15|GPIO_PIN_5|GPIO_PIN_8
                           |GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PB12 PB13 PB14 PB15 */
-  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PD12 PD13 */

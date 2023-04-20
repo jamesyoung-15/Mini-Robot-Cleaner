@@ -8,3 +8,6 @@
 1681877109659	Rename resource 'IR_Sensors'
 1681877132581	Rename resource 'UR_Sensors'
 1681884399023	Rename resource 'lcdtp_v1.c'
+1681902144960	Rename resource 'HC_SR04_U1.h'
+1681902149990	Rename resource 'HC_SR04\.h'
+1681902155311	Rename resource 'HC_SR04_U1.c'

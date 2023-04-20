@@ -258,11 +258,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Src/../../LCD/lvgl/lv_port_indev.h \
  ../Core/Src/../../LCD/lvgl/./lvgl-v8.3/lvgl.h \
  ../Core/Src/../../LCD/lvgl/../lcd_core/xpt2046.h \
+ ../Core/Src/../../UltraSonic_Sensors/HC_SR04.h \
  ../Core/Src/../../LCD/gui/menu.h \
  ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h \
- ../Core/Src/../../ESP_Driver/esp.h ../Core/Inc/lcdtp.h
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h \
+ ../Core/Src/../../ESP_Driver/esp.h \
+ ../Core/Src/../../Motor_Control/car_movement.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -523,9 +527,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Src/../../LCD/lvgl/lv_port_indev.h:
 ../Core/Src/../../LCD/lvgl/./lvgl-v8.3/lvgl.h:
 ../Core/Src/../../LCD/lvgl/../lcd_core/xpt2046.h:
+../Core/Src/../../UltraSonic_Sensors/HC_SR04.h:
 ../Core/Src/../../LCD/gui/menu.h:
 ../Core/Src/../../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h:
 ../Core/Src/../../ESP_Driver/esp.h:
-../Core/Inc/lcdtp.h:
+../Core/Src/../../Motor_Control/car_movement.h:

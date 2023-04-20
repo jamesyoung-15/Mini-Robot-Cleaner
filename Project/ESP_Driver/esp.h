@@ -9,6 +9,7 @@
 #include "string.h"
 #include "stm32f1xx_hal.h"
 #include "../LCD/gui/menu.h"
+#include "../Motor_Control/car_movement.h"
 
 // Variables
 
@@ -65,15 +66,5 @@ void checkWifiState();
 void checkIP();
 void checkAPs();
 
-// robot car movement handlers
-void moveRight();
-void moveLeft();
-void moveForward();
-void moveBackward();
-void moveBackwardLeft();
-void moveBackwardRight();
-void moveForwardRight();
-void moveForwardLeft();
-void stopMovement();
 
 #endif

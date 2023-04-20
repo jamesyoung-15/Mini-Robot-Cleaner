@@ -14,7 +14,7 @@ buffer_size = 2048 # buffer size 2048 as input works for most purposes
 # create client's socket
 clientSocket = socket(AF_INET, SOCK_DGRAM) #af_inet indicates ipv4, sockdram indicates udp
 
-delay = 0.3
+delay = 0.25
 
 # send string param message via UDP
 def send(message):
@@ -80,12 +80,12 @@ keyboard.add_hotkey('s', moveBackward)
 keyboard.add_hotkey('d', moveRight)
 keyboard.add_hotkey('k', stop)
 
-# keyboard.add_hotkey('w+d', moveForwardRight)
-# keyboard.add_hotkey('w+a', moveForwardLeft)
-# keyboard.add_hotkey('s+d', moveBackwardRight)
-# keyboard.add_hotkey('s+a', moveBackwardLeft)
+keyboard.add_hotkey('w+d', moveForwardRight)
+keyboard.add_hotkey('w+a', moveForwardLeft)
+keyboard.add_hotkey('s+d', moveBackwardRight)
+keyboard.add_hotkey('s+a', moveBackwardLeft)
 
-# on release stop
+# on release stopwdadswswsswswswsssswswswswswwsssssswwwwwwwwwwwwwwwwwwwwwwwdaasw
 keyboard.on_release(stop)
 
 # menu
