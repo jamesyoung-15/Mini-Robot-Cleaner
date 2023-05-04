@@ -40,6 +40,9 @@
 // motors
 #include "../../Motor_Control/car_movement.h"
 
+// other sensors
+
+
 // C library
 #include "string.h"
 #include <stdio.h>
@@ -81,11 +84,8 @@ SRAM_HandleTypeDef hsram1;
 char network_name [] = "";
 char network_password[] = "";
 uint8_t car_mode = 0; // 0 is manual, 1 is automatic
-// ip address of server if needed, not needed for now
-// char ip_address[] = "";
-// topic name for mqtt
-//char topic_name[] = "robot/direction";
-
+// ip address to send to
+char ip_address[] = "";
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -155,7 +155,7 @@ int main(void)
   // ESP8266 Initialization
   resetEsp(); // reset module just to make sure
 //  echoOff(); // turn off at echo
-  HAL_Delay(200);
+  HAL_Delay(1200);
   connectWifi(network_name,network_password); // connect to wifi
   createTCPServer(); // create tcp server
   HAL_Delay(2000);
@@ -173,8 +173,7 @@ int main(void)
   checkIP();
   printMode("Manual Mode");
   createUDPServer();
-//  moveForward();
-////  connectMQTT(ip_address);
+  HAL_Delay(1000);
 
   /* USER CODE END 2 */
 
@@ -189,16 +188,40 @@ int main(void)
 		  request_receive = 0;
 	  }
 
+	  // send data to udp
+	  if(detect_request)
+	  {
+		  printDebug("Sending Data");
+		  sendUDPData(ip_address);
+		  clearReceivedBuffer();
+		  detect_request=0;
+	  }
+	  if(detect_change)
+	  {
+		  printDebug("Changed mode wirelessly");
+		  if(car_mode == 0)
+		  {
+			  car_mode=1;
+		  }
+		  else if(car_mode == 1)
+		  {
+			  car_mode=0;
+		  }
+		  changeButton();
+		  clearReceivedBuffer();
+		  detect_change=0;
+	  }
+
   // Sensor data handling
 
 	  char sensorData[100]; // for printing to screen
     // get 3 sensor data
-	  uint32_t front_middle= HC_SR04_U1();
-//	  uint32_t front_middle=0;
-	  uint32_t left_sensor = HC_SR04_U2();
-//	  uint32_t left_sensor =0;
-	  uint32_t right_sensor = HC_SR04_U3();
-//	  uint32_t right_sensor=0;
+//	  uint32_t front_middle= HC_SR04_U1();
+	  uint32_t front_middle=15;
+//	  uint32_t left_sensor = HC_SR04_U2();
+	  uint32_t left_sensor =15;
+//	  uint32_t right_sensor = HC_SR04_U3();
+	  uint32_t right_sensor=15;
 	  sprintf(sensorData,"Sensor Front Mid: %lu\nSensor Front L: %lu\nSensor Front R: %lu",front_middle,left_sensor,right_sensor);
 	  printUltrasonicSensor(sensorData);
 
@@ -240,26 +263,26 @@ int main(void)
 			  detect_backward=0;
 			  prev_move=4;
 		  }
-		  if(detect_forward_left)
-		  {
-			  moveForwardLeft();
-			  detect_forward_left=0;
-		  }
-		  if(detect_forward_right)
-		  {
-			  moveForwardRight();
-			  detect_forward_right=0;
-		  }
-		  if(detect_backward_left)
-		  {
-			  moveBackwardLeft();
-			  detect_backward_left=0;
-		  }
-		  if(detect_backward_right)
-		  {
-			  moveBackwardRight();
-			  detect_backward_right=0;
-		  }
+//		  if(detect_forward_left)
+//		  {
+//			  moveForwardLeft();
+//			  detect_forward_left=0;
+//		  }
+//		  if(detect_forward_right)
+//		  {
+//			  moveForwardRight();
+//			  detect_forward_right=0;
+//		  }
+//		  if(detect_backward_left)
+//		  {
+//			  moveBackwardLeft();
+//			  detect_backward_left=0;
+//		  }
+//		  if(detect_backward_right)
+//		  {
+//			  moveBackwardRight();
+//			  detect_backward_right=0;
+//		  }
 		  if(detect_stop)
 		  {
 			  stopMovement();
@@ -294,16 +317,22 @@ int main(void)
 	  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==1)
 	  {
 		  resetEsp();
+		  HAL_Delay(1000);
 		  connectWifi(network_name,network_password);
 		  HAL_Delay(200);
+		  createTCPServer();
+		  HAL_Delay(1000);
 		  createUDPServer();
-		  HAL_Delay(200);
+		  HAL_Delay(1000);
 		  checkIP();
 	  }
 	  // button k2 to recheck ip
 	  if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)==1)
 	  {
-		   checkIP();
+		  disconnectWifi();
+		  HAL_Delay(200);
+		  clearReceivedBuffer();
+		  checkIP();
 	  }
 
 

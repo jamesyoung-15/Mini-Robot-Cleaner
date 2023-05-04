@@ -1,0 +1,8 @@
+
+char* getTemp()
+{
+	char data[50]={0};
+	float temp = 0;
+	sprintf("%f",temp);
+	return data;
+}

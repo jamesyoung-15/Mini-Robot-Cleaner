@@ -1,0 +1,8 @@
+#include "lm35.h"
+
+
+float getTempData()
+{
+	float temp = 0;
+	return temp;
+}

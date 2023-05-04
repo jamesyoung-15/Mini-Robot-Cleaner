@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="0x60020000"/>
+		<item key="selection" value="ILI9341_DispWindow_X_Star"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="ILI9341_DispWindow_X_Star"/>
+			<item value="disable"/>
+			<item value="detect_left"/>
+			<item value="�"/>
+			<item value="4545"/>
+			<item value="discon"/>
+			<item value="close"/>
+			<item value="cipsend"/>
+			<item value="request_receive"/>
 			<item value="0x60020000"/>
 			<item value="__HAL_UART_ENABLE_IT(&amp;huart3, UART_IT_RXNE);"/>
 			<item value="sendweb"/>
 			<item value="font"/>
 			<item value="okresponse"/>
 			<item value="okRespon"/>
-			<item value="testrespon"/>
-			<item value="long"/>
-			<item value="\;"/>
-			<item value="mqtt"/>
-			<item value="showRespo"/>
-			<item value="ip_ad"/>
-			<item value="192."/>
-			<item value="test"/>
-			<item value="10."/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
@@ -35,8 +35,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="1102"/>
 		<item key="DIALOG_Y_ORIGIN" value="436"/>
-		<item key="DIALOG_WIDTH" value="340"/>
-		<item key="DIALOG_HEIGHT" value="437"/>
-		<item key="DIALOG_FONT_NAME" value="1|Fira Sans|10.0|0|GTK|1|"/>
+		<item key="DIALOG_WIDTH" value="357"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
+		<item key="DIALOG_FONT_NAME" value="1|Sans|10.0|0|GTK|1|"/>
 	</section>
 </section>

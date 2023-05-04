@@ -16,8 +16,9 @@ uint16_t LCD_Y_LENGTH = ILI9341_MORE_PIXEL;
 uint8_t LCD_SCAN_MODE = 6;
 
 uint16_t lcdid = LCDID_UNKNOWN;
-
+static sFONT *LCD_Currentfonts = &Font8x16;
 static uint16_t CurrentBackColor   = WHITE;
+static uint16_t CurrentTextColor   = BLACK;
 
 __inline void                 ILI9341_Write_Cmd           ( uint16_t usCmd );
 __inline void                 ILI9341_Write_Data          ( uint16_t usData );
@@ -96,7 +97,7 @@ static void ILI9341_REG_Config ( void )
     ILI9341_Write_Data ( 0x00 );
     ILI9341_Write_Data ( 0x34 );
     //ILI9341_Write_Data ( 0x02 );
-    ILI9341_Write_Data ( 0x06 ); //ԭ����0x02��Ϊ0x06�ɷ�ֹҺ����ʾ����ʱ�����Ƶ����
+    ILI9341_Write_Data ( 0x06 ); //ԭ0x02Ϊ0x06ɷֹҺʾʱƵ
     
     /* Pump ratio control (F7h) */
     DEBUG_DELAY ();
@@ -188,7 +189,7 @@ static void ILI9341_REG_Config ( void )
     /* memory access control set */
     DEBUG_DELAY ();
     ILI9341_Write_Cmd ( 0x36 ); 	
-    ILI9341_Write_Data ( 0xC8 );    /*����  ���Ͻǵ� (���)�����½� (�յ�)ɨ�跽ʽ*/
+    ILI9341_Write_Data ( 0xC8 );
     DEBUG_DELAY ();
     
     /* column address control set */
@@ -287,7 +288,7 @@ static void ILI9341_REG_Config ( void )
     /* memory access control set */
     DEBUG_DELAY ();
     ILI9341_Write_Cmd ( 0x36 );   //Memory Access Control
-    ILI9341_Write_Data ( 0x00 );  /*����  ���Ͻǵ� (���)�����½� (�յ�)ɨ�跽ʽ*/
+    ILI9341_Write_Data ( 0x00 );
     DEBUG_DELAY ();
     
     ILI9341_Write_Cmd(0x3A);   
@@ -392,11 +393,10 @@ void ILI9341_Init ( void )
 //	ILI9341_GPIO_Config ();
 //	ILI9341_FSMC_Config ();
 	
-	ILI9341_BackLed_Control ( ENABLE );      //����LCD�����
+	ILI9341_BackLed_Control ( ENABLE );
 	ILI9341_Rst ();
 	ILI9341_REG_Config ();
 	
-	//����Ĭ��ɨ�跽������ 6 ģʽΪ�󲿷�Һ�����̵�Ĭ����ʾ����  
 	ILI9341_GramScan(LCD_SCAN_MODE);
 	LCD_SetBackColor(WHITE);
 	ILI9341_Clear(0,0,240,320);
@@ -455,7 +455,7 @@ uint16_t ILI9341_ReadID(void)
 
 void ILI9341_Rst( void )
 {			
-	digitalL( GPIOE,GPIO_PIN_1);	 //�͵�ƽ��λ
+	digitalL( GPIOE,GPIO_PIN_1);	 //͵ƽλ
 
 	ILI9341_Delay ( 0xAFF ); 						   
 
@@ -468,48 +468,48 @@ void ILI9341_Rst( void )
 
 void ILI9341_GramScan ( uint8_t ucOption )
 {	
-	//������飬ֻ������0-7
+	//飬ֻ0-7
 	if(ucOption >7 )
 		return;
 	
-	//����ģʽ����LCD_SCAN_MODE��ֵ����Ҫ���ڴ�����ѡ��������
+	//ģʽLCD_SCAN_MODEֵҪڴѡ
 	LCD_SCAN_MODE = ucOption;
 	
-	//����ģʽ����XY��������ؿ��
+	//ģʽXYؿ
 	if(ucOption%2 == 0)	
 	{
-		//0 2 4 6ģʽ��X�������ؿ��Ϊ240��Y����Ϊ320
+		//0 2 4 6ģʽXؿΪ240YΪ320
 		LCD_X_LENGTH = ILI9341_LESS_PIXEL;
 		LCD_Y_LENGTH =	ILI9341_MORE_PIXEL;
 	}
 	else				
 	{
-		//1 3 5 7ģʽ��X�������ؿ��Ϊ320��Y����Ϊ240
+		//1 3 5 7ģʽXؿΪ320YΪ240
 		LCD_X_LENGTH = ILI9341_MORE_PIXEL;
 		LCD_Y_LENGTH =	ILI9341_LESS_PIXEL; 
 	}
 
-	//0x36��������ĸ�3λ����������GRAMɨ�跽��	
+	//0x36ĸ3λGRAMɨ跽
 	ILI9341_Write_Cmd ( 0x36 );
   if(lcdid == LCDID_ILI9341)
   {
-    ILI9341_Write_Data ( 0x08 |(ucOption<<5));//����ucOption��ֵ����LCD��������0-7��ģʽ
+    ILI9341_Write_Data ( 0x08 |(ucOption<<5));//ucOptionֵLCD0-7ģʽ
   }
   else if(lcdid == LCDID_ST7789V)
   {
-    ILI9341_Write_Data ( 0x00 |(ucOption<<5));//����ucOption��ֵ����LCD��������0-7��ģʽ
+    ILI9341_Write_Data ( 0x00 |(ucOption<<5));//ucOptionֵLCD0-7ģʽ
   }
 	ILI9341_Write_Cmd ( CMD_SetCoordinateX ); 
-	ILI9341_Write_Data ( 0x00 );		/* x ��ʼ�����8λ */
-	ILI9341_Write_Data ( 0x00 );		/* x ��ʼ�����8λ */
-	ILI9341_Write_Data ( ((LCD_X_LENGTH-1)>>8)&0xFF ); /* x ���������8λ */	
-	ILI9341_Write_Data ( (LCD_X_LENGTH-1)&0xFF );				/* x ���������8λ */
+	ILI9341_Write_Data ( 0x00 );		/* x ʼ8λ */
+	ILI9341_Write_Data ( 0x00 );		/* x ʼ8λ */
+	ILI9341_Write_Data ( ((LCD_X_LENGTH-1)>>8)&0xFF ); /* x 8λ */
+	ILI9341_Write_Data ( (LCD_X_LENGTH-1)&0xFF );				/* x 8λ */
 
 	ILI9341_Write_Cmd ( CMD_SetCoordinateY ); 
-	ILI9341_Write_Data ( 0x00 );		/* y ��ʼ�����8λ */
-	ILI9341_Write_Data ( 0x00 );		/* y ��ʼ�����8λ */
-	ILI9341_Write_Data ( ((LCD_Y_LENGTH-1)>>8)&0xFF );	/* y ���������8λ */	 
-	ILI9341_Write_Data ( (LCD_Y_LENGTH-1)&0xFF );				/* y ���������8λ */
+	ILI9341_Write_Data ( 0x00 );		/* y ʼ8λ */
+	ILI9341_Write_Data ( 0x00 );		/* y ʼ8λ */
+	ILI9341_Write_Data ( ((LCD_Y_LENGTH-1)>>8)&0xFF );	/* y 8λ */
+	ILI9341_Write_Data ( (LCD_Y_LENGTH-1)&0xFF );				/* y 8λ */
 
 	/* write gram start */
 	ILI9341_Write_Cmd ( CMD_SetPixel );	
@@ -519,13 +519,13 @@ void ILI9341_GramScan ( uint8_t ucOption )
 
 void ILI9341_OpenWindow ( uint16_t usX, uint16_t usY, uint16_t usWidth, uint16_t usHeight )
 {	
-	ILI9341_Write_Cmd ( CMD_SetCoordinateX ); 				 /* ����X���� */
-	ILI9341_Write_Data ( usX >> 8  );	 /* �ȸ�8λ��Ȼ���8λ */
-	ILI9341_Write_Data ( usX & 0xff  );	 /* ������ʼ��ͽ�����*/
+	ILI9341_Write_Cmd ( CMD_SetCoordinateX ); 				 /* X */
+	ILI9341_Write_Data ( usX >> 8  );	 /* ȸ8λȻ8λ */
+	ILI9341_Write_Data ( usX & 0xff  );	 /* ʼͽ*/
 	ILI9341_Write_Data ( ( usX + usWidth - 1 ) >> 8  );
 	ILI9341_Write_Data ( ( usX + usWidth - 1 ) & 0xff  );
 
-	ILI9341_Write_Cmd ( CMD_SetCoordinateY ); 			     /* ����Y����*/
+	ILI9341_Write_Cmd ( CMD_SetCoordinateY ); 			     /* Y*/
 	ILI9341_Write_Data ( usY >> 8  );
 	ILI9341_Write_Data ( usY & 0xff  );
 	ILI9341_Write_Data ( ( usY + usHeight - 1 ) >> 8 );
@@ -588,8 +588,68 @@ void ILI9341_DrawDot(uint16_t usX, uint16_t usY, uint16_t color)
 	}
 }
 
+void ILI9341_DispChar_EN ( uint16_t usX, uint16_t usY, const char cChar )
+{
+	uint8_t  byteCount, bitCount,fontLength;
+	uint16_t ucRelativePositon;
+	uint8_t *Pfont;
 
 
+	ucRelativePositon = cChar - ' ';
+
+
+	fontLength = (LCD_Currentfonts->Width*LCD_Currentfonts->Height)/8;
+
+
+	Pfont = (uint8_t *)&LCD_Currentfonts->table[ucRelativePositon * fontLength];
+
+
+	ILI9341_OpenWindow ( usX, usY, LCD_Currentfonts->Width, LCD_Currentfonts->Height);
+
+	ILI9341_Write_Cmd ( CMD_SetPixel );
+
+
+	for ( byteCount = 0; byteCount < fontLength; byteCount++ )
+	{
+
+			for ( bitCount = 0; bitCount < 8; bitCount++ )
+			{
+					if ( Pfont[byteCount] & (0x80>>bitCount) )
+						ILI9341_Write_Data ( CurrentTextColor );
+					else
+						ILI9341_Write_Data ( CurrentBackColor );
+			}
+	}
+}
+
+
+void ILI9341_DispStringLine_EN (  uint16_t line,  char * pStr )
+{
+	uint16_t usX = 0;
+
+	while ( * pStr != '\0' )
+	{
+		if ( ( usX - ILI9341_DispWindow_X_Star + LCD_Currentfonts->Width ) > LCD_X_LENGTH )
+		{
+			usX = ILI9341_DispWindow_X_Star;
+			line += LCD_Currentfonts->Height;
+		}
+
+		if ( ( line - ILI9341_DispWindow_Y_Star + LCD_Currentfonts->Height ) > LCD_Y_LENGTH )
+		{
+			usX = ILI9341_DispWindow_X_Star;
+			line = ILI9341_DispWindow_Y_Star;
+		}
+
+		ILI9341_DispChar_EN ( usX, line, * pStr);
+
+		pStr ++;
+
+		usX += LCD_Currentfonts->Width;
+
+	}
+
+}
 
 
 /*********************end of file*************************/

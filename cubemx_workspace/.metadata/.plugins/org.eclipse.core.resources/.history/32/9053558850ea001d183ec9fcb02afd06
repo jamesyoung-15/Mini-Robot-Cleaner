@@ -1,0 +1,8 @@
+#include "lm35.h"
+
+
+uint32_t temperatureData()
+{
+	uint32_t temp = 0;
+	return temp;
+}

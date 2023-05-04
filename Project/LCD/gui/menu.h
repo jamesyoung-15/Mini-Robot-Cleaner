@@ -18,4 +18,5 @@ void printIp(char* ip);
 void printDebug(char* msg);
 void printUltrasonicSensor(char* msg);
 char* getModeString();
+void changeButton();
 #endif

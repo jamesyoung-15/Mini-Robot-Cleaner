@@ -142,6 +142,7 @@ static void disp_init(void)
 {
     /*You code here*/
 	ILI9341_Init();
+	ILI9341_DispStringLine_EN(150,"Initializing Robot...");
 //	LCD_INIT();
 }
 

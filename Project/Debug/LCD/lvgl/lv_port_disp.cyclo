@@ -1,4 +1,4 @@
-lv_port_disp.c:167:13:disp_flush	2
+lv_port_disp.c:168:13:disp_flush	2
 lv_port_disp.c:55:6:lv_port_disp_init	1
-lv_port_disp.c:152:6:disp_enable_update	1
-lv_port_disp.c:159:6:disp_disable_update	1
+lv_port_disp.c:153:6:disp_enable_update	1
+lv_port_disp.c:160:6:disp_disable_update	1

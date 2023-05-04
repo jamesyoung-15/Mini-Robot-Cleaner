@@ -18,9 +18,10 @@ uint8_t detect_forward_right = 0;
 uint8_t detect_backward_right = 0;
 uint8_t detect_backward_left = 0;
 uint8_t detect_stop = 0;
+uint8_t detect_request = 0;
+uint8_t detect_change = 0;
 
-char html_file[]=
-"<!DOCTYPE html> <body> <header> <h1>Mini Robot Cleaner</h1> </header> <main> <div class=\"container-area\"> <div class=\"joystick-container\" id=\"joystick-area\"> <div class=\"joystick\" id=\"nipple\"></div> </div> </div> </main> </body> <style> *{ font-family: monospace; font-size: 18px; } body { overflow: hidden; background-color: #0a0a23;; margin: 0; color: #f8f8f2; } header { text-align: center; background-color: #0a0a23; text-align: center; } main { background-color: #1b1b32; height: 100vh; } .container-area{ width: 70%; margin: 0 auto; display: flex; justify-content: space-between; flex-direction: row; flex-wrap: wrap; } .joystick-container{ position: relative; width: 640px; height: 480px; display: flex; flex-direction: column-reverse; margin: auto; } </style> <script src=\"https://yoannmoinet.github.io/nipplejs/javascripts/nipplejs.js\"></script> <script> var ip_address = \"192.168.40.104:80\"; function move(angle,speed) { if(speed>0.45) { if(angle<=35 || angle>335) { send(\"R-\"); } else if(angle>35 && angle<60) { send(\"FR-\"); } else if(angle>=60 && angle<=125) { send(\"F-\"); } else if(angle>125 && angle<145) { send(\"FL-\"); } else if(angle>=145 && angle<=210) { send(\"L-\");; } else if(angle>210 && angle<235) { send(\"BL-\"); } else if(angle>235 && angle<305) { send(\"B-\"); } else if(angle>305 && angle<335) { send(\"BR-\"); } } } function send(dir) { var xhr = new XMLHttpRequest(); xhr.open(\"GET\", \"http://\"+ip_address+\"/\" + dir, true); xhr.send(); } var options = { zone: document.getElementById('nipple'), mode: 'static', size: 100, position: {left:\"50%\", top:\"50%\"}, color: 'white', threshold: 1 }; manager = nipplejs.create(options); speed = 0; angle = 0; self.manager.on('start', function (event, nipple) { timer = setInterval(function() {move(angle,speed)},1500); }); self.manager.on('move', function (event, nipple) { speed = nipple.force; angle = nipple.angle.degree; }); self.manager.on('end', function () { if (timer) { clearInterval(timer); }send(\"sp-\"); }); </script> </html>";
+char html_file[]="<!DOCTYPE html> <html data-theme=\"dark\"> <head> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\"> </head> <body> <h1 style=\"text-align: center;\">Sensor Info</h1> <table role=\"grid\"> <thead> <tr> <th scope=\"col\">Temperature</th> <th scope=\"col\">Humidty</th> <th scope=\"col\">CO2</th> <th scope=\"col\">TVOC</th> </tr> </thead> <tbody> <tr> <td> °C</td> <td> %</td> <td> ppm</td> <td> ppm</td> </tr> </tbody> </table> </body> </html>";
 
 void sendData(char * command)
 {
@@ -124,6 +125,7 @@ void disconnectWifi()
 {
 	sendData("AT+CWQAP");
 	HAL_Delay(100);
+	printDebug("Disconnect Wi-Fi");
 	clearReceivedBuffer();
 }
 
@@ -201,7 +203,7 @@ void createUDPServer()
 {
 	// allow multiple connections
 	sendData("AT+CIPMUX=1\r\n");
-	HAL_Delay(200);
+	HAL_Delay(1000);
 	clearReceivedBuffer();
 	// create udp server with own ip at port 4545
 	sendData("AT+CIPSTART=0,\"UDP\",\"0.0.0.0\",4545,4545,2\r\n");
@@ -215,6 +217,7 @@ void createTCPServer()
 	// enable multiple connections, for tcp
 	sendData("AT+CIPMUX=1\r\n");
 	HAL_Delay(200);
+	clearReceivedBuffer();
 	// create tcp server, listening at port 80
 	sendData("AT+CIPSERVER=1,80\r\n");
 	HAL_Delay(200);
@@ -272,8 +275,25 @@ void sendWebsite()
 	HAL_Delay(100);
 	sendData("AT+CIPCLOSE=0\r\n");
 	HAL_Delay(100);
-//	clearReceivedBuffer();
+	clearReceivedBuffer();
 	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
+}
+
+void sendUDPData(char* ip_address)
+{
+	float temp=0;
+	char data[80] = {0};
+	if(car_mode == 0)
+		sprintf(data,"Mode: Manual\nTemperature: %.2f °C",temp);
+	else if(car_mode==1)
+		sprintf(data,"Mode: Automatic\nTemperature: %.2f °C",temp);
+	char at_command[50]={0};
+	sprintf(at_command,"AT+CIPSEND=0,%i,\"%s\",4545\r\n",strlen(data),ip_address);
+	sendData(at_command);
+	HAL_Delay(100);
+	sendData(data);
+	HAL_Delay(100);
+	clearReceivedBuffer();
 }
 
 
@@ -282,7 +302,8 @@ void sendWebsite()
 void serverHandler()
 {
 	// If an HTTP GET request header is found and requests for html page, then we give it default static webpage by sending HTML file to server
-	if(strstr(buffer,"GET")!=NULL && (strstr(buffer,"html"))!=NULL)
+//	if(strstr(buffer,"GET")!=NULL && (strstr(buffer,"html"))!=NULL)
+	if(strstr(buffer,"GET")!=NULL)
 	{
 		sendWebsite();
 		showResponse();
@@ -363,61 +384,65 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
         		if(buffer[buffer_index-4] == '\r' && buffer[buffer_index-3] == '\n' && buffer[buffer_index-2] == '\r' && buffer[buffer_index-1] == '\n')
         			request_receive = 1;
 		}
-        // get move car direction: check if buffer contains something like "/R-", as this is the command sent through HTTP GET header to tell direction, handle here as better to catch command earlier rather than wait till end of copying uart message to buffer
-        if(buffer_index>3)
+        // get move car direction: check if buffer contains something like "/R-"
+        if(buffer_index>=3)
         {
         	// right
-        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='R' && buffer[buffer_index=='-'])
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='R')
         	{
         		detect_right = 1;
         	}
         	// left
-        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='L' && buffer[buffer_index=='-'])
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='L')
         	{
         		detect_left = 1;
         	}
         	// forward
-        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='F' && buffer[buffer_index=='-'])
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='F')
         	{
         		detect_forward = 1;
         	}
         	// backward
-        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='B' && buffer[buffer_index=='-'])
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='B')
         	{
         		detect_backward = 1;
         	}
-        	// below is optional, for more precision
-        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='L' && buffer[buffer_index=='-'])
-			{
-				detect_backward_left = 1;
-			}
-        	// backward right
-        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='R' && buffer[buffer_index=='-'])
-			{
-				detect_backward_right = 1;
-			}
-        	// foward right
-        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='R' && buffer[buffer_index=='-'])
-			{
-				detect_forward_right = 1;
-			}
-        	// forward left
-        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='L' && buffer[buffer_index=='-'])
-			{
-				detect_forward_left = 1;
-			}
-        	// forward left
-        	if(buffer[buffer_index-2]=='s' && buffer[buffer_index-1]=='p' && buffer[buffer_index=='-'])
+        	if(buffer[buffer_index-2]=='s' && buffer[buffer_index-1]=='p')
 			{
 				detect_stop = 1;
 			}
-        	if(buffer[buffer_index-2]=='C' && buffer[buffer_index-1]=='M' && buffer[buffer_index]=='-')
-        	{
-        		car_mode = 0;
-        	}
+        	// change mode wirelessly
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='C')
+			{
+				detect_change = 1;
+			}
+        	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='G')
+			{
+				detect_request = 1;
+			}
+
+        	// below is optional, for more precision
+//        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='L' && buffer[buffer_index]=='-')
+//			{
+//				detect_backward_left = 1;
+//			}
+//        	// backward right
+//        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='R' && buffer[buffer_index]=='-')
+//			{
+//				detect_backward_right = 1;
+//			}
+//        	// foward right
+//        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='R' && buffer[buffer_index]=='-')
+//			{
+//				detect_forward_right = 1;
+//			}
+//        	// forward left
+//        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='L' && buffer[buffer_index]=='-')
+//			{
+//				detect_forward_left = 1;
+//			}
 
         }
-
         HAL_UART_Receive_IT(&huart3, (uint8_t *)&single_buffer, 1);
     }
 }

@@ -28,6 +28,8 @@ extern uint8_t detect_forward_right;
 extern uint8_t detect_backward_right;
 extern uint8_t detect_backward_left;
 extern uint8_t detect_stop;
+extern uint8_t detect_change;
+extern uint8_t detect_request;
 
 // extern variable for changing mode
 extern uint8_t car_mode;
@@ -47,6 +49,7 @@ void checkAT();
 // basic init
 void resetEsp();
 void connectWifi(char* ssid, char* passwd);
+void disconnectWifi();
 // mqtt functions
 void connectMQTT(char*ip_address);
 void subMQTT(char* topic);
@@ -61,6 +64,7 @@ void sendWebsite();
 void serverHandler();
 void createTCPServer();
 void createUDPServer();
+void sendUDPData(char* ip_address);
 
 
 // query functions

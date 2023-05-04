@@ -6,6 +6,8 @@ lv_obj_t * debug_label;
 lv_obj_t* ip_label;
 lv_obj_t* mode_label;
 lv_obj_t* ultrasonic_sensor_label;
+lv_obj_t * button_modes;
+
 
 // for button matrix
 static const char* button_map[] = {"Automatic Mode","\n","Manual Mode",""};
@@ -101,7 +103,7 @@ void menuInit()
 
 
 	// Tab 2 mode buttons with button matrix
-	lv_obj_t * button_modes = lv_btnmatrix_create(tab2);
+	button_modes = lv_btnmatrix_create(tab2);
 	lv_btnmatrix_set_map(button_modes,button_map);
 	lv_btnmatrix_set_btn_ctrl_all(button_modes, LV_BTNMATRIX_CTRL_CHECKABLE); // make it so button is filled when pressed
 	lv_btnmatrix_set_one_checked(button_modes, true); // only one button filled at time
@@ -139,6 +141,18 @@ void menuInit()
 
 }
 
+void changeButton()
+{
+//	uint16_t id = lv_btnmatrix_get_selected_btn(button_modes);
+	if(car_mode == 0)
+	{
+		lv_btnmatrix_set_btn_ctrl(button_modes,1,LV_BTNMATRIX_CTRL_CHECKED);
+	}
+	else if(car_mode == 1)
+	{
+		lv_btnmatrix_set_btn_ctrl(button_modes,0,LV_BTNMATRIX_CTRL_CHECKED);
+	}
+}
 
 
 void printDebug(char* msg)
