@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Motor_Control/car_movement.c 
+../Motor_Control/car_movement.c \
+../Motor_Control/cleaning_motor.c 
 
 OBJS += \
-./Motor_Control/car_movement.o 
+./Motor_Control/car_movement.o \
+./Motor_Control/cleaning_motor.o 
 
 C_DEPS += \
-./Motor_Control/car_movement.d 
+./Motor_Control/car_movement.d \
+./Motor_Control/cleaning_motor.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ Motor_Control/%.o Motor_Control/%.su Motor_Control/%.cyclo: ../Motor_Control/%.c
 clean: clean-Motor_Control
 
 clean-Motor_Control:
-	-$(RM) ./Motor_Control/car_movement.cyclo ./Motor_Control/car_movement.d ./Motor_Control/car_movement.o ./Motor_Control/car_movement.su
+	-$(RM) ./Motor_Control/car_movement.cyclo ./Motor_Control/car_movement.d ./Motor_Control/car_movement.o ./Motor_Control/car_movement.su ./Motor_Control/cleaning_motor.cyclo ./Motor_Control/cleaning_motor.d ./Motor_Control/cleaning_motor.o ./Motor_Control/cleaning_motor.su
 
 .PHONY: clean-Motor_Control
 

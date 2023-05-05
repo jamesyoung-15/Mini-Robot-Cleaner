@@ -32,6 +32,7 @@ static void event_handler(lv_event_t *e)
 	else if(strstr(mode,"Manual")!=NULL)
 	{
 		printDebug("Manual Mode Chosen");
+		detect_stop=1;
 		car_mode=0;
 	}
 

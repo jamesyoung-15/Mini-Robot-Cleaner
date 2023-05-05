@@ -254,7 +254,8 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h \
- /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h
 ../LCD/gui/menu.h:
 ../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
 ../LCD/gui/../lvgl/lvgl-v8.3/src/misc/lv_log.h:
@@ -512,3 +513,4 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h:

@@ -254,6 +254,7 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
  ../Motor_Control/../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/lv_span.h \
  ../Motor_Control/../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h \
  ../Motor_Control/../ESP_Driver/../Motor_Control/car_movement.h
 ../Motor_Control/car_movement.h:
 ../Motor_Control/../ESP_Driver/esp.h:
@@ -511,4 +512,5 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
 ../Motor_Control/../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/lv_span.h:
 ../Motor_Control/../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h:
 ../Motor_Control/../ESP_Driver/../Motor_Control/car_movement.h:

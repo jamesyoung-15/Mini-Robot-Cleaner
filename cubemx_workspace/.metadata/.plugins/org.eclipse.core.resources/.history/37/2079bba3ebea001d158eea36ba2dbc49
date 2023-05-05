@@ -1,0 +1,11 @@
+#include "cleaning_motor.h"
+
+void cleaning_on()
+{
+
+}
+
+void cleaning_off()
+{
+
+}

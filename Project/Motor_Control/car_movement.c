@@ -3,8 +3,13 @@
 
 void moveRight()
 {
-//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
 	printDebug("Right");
+
+	// stop left motor
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
+
+	// right motor on
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_RESET);
 //	okResponse();
@@ -13,12 +18,16 @@ void moveRight()
 }
 void moveLeft()
 {
-//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
-	printDebug("Left");
-	// left motor
+	// stop right motor
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_14,GPIO_PIN_RESET);
+
+
+	// left motor on
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_RESET);
 //	okResponse();
+	printDebug("Left");
 	clearReceivedBuffer();
 }
 
@@ -39,7 +48,7 @@ void moveForward()
 
 void moveBackward()
 {
-	//
+
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_15,GPIO_PIN_SET);
 
@@ -52,7 +61,6 @@ void moveBackward()
 
 void stopMovement()
 {
-//	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
 	printDebug("Stop Car");
 	// stop left
 	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_13,GPIO_PIN_RESET);

@@ -5,10 +5,14 @@
 #define RX_BUFFER_SIZE  1024
 
 // Global Variables
+
+// uart data variables
 char buffer[RX_BUFFER_SIZE]; //Buffer for received response from ESP8266
 uint8_t single_buffer = 0;
 uint32_t buffer_index = 0;
 uint8_t request_receive = 0;
+
+// interrupts instructions from udp
 uint8_t detect_left = 0;
 uint8_t detect_right = 0;
 uint8_t detect_forward = 0;
@@ -420,6 +424,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			{
 				detect_request = 1;
 			}
+
 
         	// below is optional, for more precision
 //        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='L' && buffer[buffer_index]=='-')

@@ -39,6 +39,7 @@
 
 // motors
 #include "../../Motor_Control/car_movement.h"
+#include "../../Motor_Control/cleaning_motor.h"
 
 // other sensors
 
@@ -70,6 +71,7 @@ CRC_HandleTypeDef hcrc;
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim5;
 
 UART_HandleTypeDef huart3;
 DMA_HandleTypeDef hdma_usart3_rx;
@@ -81,11 +83,15 @@ SRAM_HandleTypeDef hsram1;
 /* USER CODE BEGIN PV */
 
 // add network ssid and password here
-char network_name [] = "";
-char network_password[] = "";
+char network_name [] = "YangFamily";
+char network_password[] = "yang27764892";
 uint8_t car_mode = 0; // 0 is manual, 1 is automatic
 // ip address to send to
 char ip_address[] = "";
+
+// speed of car
+uint32_t speed = 1200;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -98,6 +104,7 @@ static void MX_CRC_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -145,12 +152,16 @@ int main(void)
   MX_TIM3_Init();
   MX_TIM2_Init();
   MX_TIM1_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 
   // initialize timer for ultrasonic sensors
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim1);
+
+  // init timer for motor speed
+  HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_3);
 
   // ESP8266 Initialization
   resetEsp(); // reset module just to make sure
@@ -174,6 +185,12 @@ int main(void)
   printMode("Manual Mode");
   createUDPServer();
   HAL_Delay(1000);
+
+  // threshold value for ultrasonic sensor, anything below this means obstacle detected
+  uint16_t threshold = 10;
+
+  // set speed
+  __HAL_TIM_SET_COMPARE(&htim5,TIM_CHANNEL_3,speed);
 
   /* USER CODE END 2 */
 
@@ -290,28 +307,49 @@ int main(void)
 			  prev_move=0;
 		  }
 	  }
+
 	  // automatic mode, will use wall follower right hand rule (https://en.wikipedia.org/wiki/Maze-solving_algorithm)
 	  else if(car_mode==1)
 	  {
 
-		  // if no obstacles ahead, keep driving forward
-		  if(front_middle>14)
-		  {
-			  moveForward();
-			  prev_move = 1;
-		  }
-		  // otherwise, move backward and turn right
-		  else if(front_middle<=14)
-		  {
-			  // stop for half a second, move backward for some milliseconds
-			  stopMovement();
-			  HAL_Delay(500);
-			  moveBackwardRight();
-			  HAL_Delay(400);
-			  prev_move = 4;
-		  }
+		  // check for obstacles and steer the car away from them
+			if (front_middle > threshold && left_sensor > threshold && right_sensor > threshold)
+			{
+				// no obstacles detected, move forward
+				// left motor
+				moveForward();
+				prev_move=1;
+			}
+			else if (left_sensor < threshold && right_sensor > threshold)
+			{
+				// obstacle detected on the left, turn right
+
+				moveRight();
+
+				HAL_Delay(40);
+
+			}
+			else if (right_sensor < threshold && left_sensor > threshold)
+			{
+				// obstacle detected on the right, turn left
+				// right motor
+				moveLeft();
+
+				HAL_Delay(40);
+			}
+			else if (front_middle < threshold && left_sensor < threshold && right_sensor < threshold)
+			{
+				// obstacles detected on both sides, backup and turn around
+				moveBackward();
+				HAL_Delay(5);
+				moveRight();
+
+				HAL_Delay(40);
+			}
 
 	  }
+
+
 
 	  // button k1 to reconnect
 	  if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)==1)
@@ -334,6 +372,7 @@ int main(void)
 		  clearReceivedBuffer();
 		  checkIP();
 	  }
+
 
 
 	  lv_task_handler();
@@ -543,6 +582,65 @@ static void MX_TIM3_Init(void)
   /* USER CODE BEGIN TIM3_Init 2 */
 
   /* USER CODE END TIM3_Init 2 */
+
+}
+
+/**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM5_Init(void)
+{
+
+  /* USER CODE BEGIN TIM5_Init 0 */
+
+  /* USER CODE END TIM5_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM5_Init 1 */
+
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 127;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 625;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM5_Init 2 */
+
+  /* USER CODE END TIM5_Init 2 */
+  HAL_TIM_MspPostInit(&htim5);
 
 }
 

@@ -17,7 +17,7 @@ class Direction(Enum):
 class Joystick(QWidget):
     def __init__(self, parent=None):
         super(Joystick, self).__init__(parent)
-        self.setMinimumSize(480, 320)
+        self.setMinimumSize(640, 480)
         self.movingOffset = QPointF(0, 0)
         self.grabCenter = False
         self.__maxDistance = 50
@@ -161,6 +161,18 @@ def getData():
     send("/G-")
     time.sleep(delay)
 
+# def speedFast():
+# 	print("Change speed to fast")
+# 	send("GF")
+
+# def speedMed():
+# 	print("Change speed to medium")
+# 	send("GM")
+
+# def speedSlow():
+# 	print("Change speed to slow")
+# 	send("GS")
+
 # def moveForwardRight():
 #     send("FR-")
 #     time.sleep(delay)
@@ -204,17 +216,26 @@ if __name__ == '__main__':
     button2.setText("Change Robot Mode")
     button1.clicked.connect(getData)
     button2.clicked.connect(changeMode)
+    
+    # button3 = QPushButton()
+    # button3.setText("Change Speed to Slow")
+    # button4 = QPushButton()
+    # button4.setText("Change Speed to Medium")
+    # button5 = QPushButton()
+    # button5.setText("Change Speed to Fast")
+    # button3.clicked.connect(speedSlow)
+    # button4.clicked.connect(speedMed)
+    # button5.clicked.connect(speedFast)
 
-    # textbox
-    textbox = QLabel("Data: \n\n")
 
     # Create joystick 
     joystick = Joystick()
-
     ml.addWidget(joystick,0,0)
-    ml.addWidget(textbox,1,0,alignment=Qt.AlignmentFlag.AlignCenter)
-    ml.addWidget(button1,2,0,alignment=Qt.AlignmentFlag.AlignCenter)
-    ml.addWidget(button2,3,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    ml.addWidget(button1,1,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    ml.addWidget(button2,2,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    # ml.addWidget(button3,3,0,alignment=Qt.AlignmentFlag.AlignLeft)
+    # ml.addWidget(button4,3,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    # ml.addWidget(button5,3,0,alignment=Qt.AlignmentFlag.AlignRight)
     mw.show()
 
     QApplication.instance().exec_()

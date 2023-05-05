@@ -1,8 +1,8 @@
-menu.c:42:6:setScreen	1
-menu.c:68:6:menuInit	1
-menu.c:144:6:changeButton	3
-menu.c:158:6:printDebug	1
-menu.c:163:6:printUltrasonicSensor	1
-menu.c:168:6:printIp	1
-menu.c:173:6:printMode	1
+menu.c:43:6:setScreen	1
+menu.c:69:6:menuInit	1
+menu.c:145:6:changeButton	3
+menu.c:159:6:printDebug	1
+menu.c:164:6:printUltrasonicSensor	1
+menu.c:169:6:printIp	1
+menu.c:174:6:printMode	1
 menu.c:16:13:event_handler	3
