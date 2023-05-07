@@ -10,7 +10,7 @@
 #include "stm32f1xx_hal.h"
 #include "../LCD/gui/menu.h"
 #include "../Motor_Control/car_movement.h"
-
+#include "../UltraSonic_Sensors/lm35.h"
 // Variables
 
 // uart variables
@@ -30,6 +30,9 @@ extern uint8_t detect_backward_left;
 extern uint8_t detect_stop;
 extern uint8_t detect_change;
 extern uint8_t detect_request;
+extern uint8_t start_cleaner;
+extern uint8_t stop_cleaner;
+
 
 // extern variable for changing mode
 extern uint8_t car_mode;

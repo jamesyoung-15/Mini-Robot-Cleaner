@@ -24,6 +24,8 @@ uint8_t detect_backward_left = 0;
 uint8_t detect_stop = 0;
 uint8_t detect_request = 0;
 uint8_t detect_change = 0;
+uint8_t start_cleaner = 0;
+uint8_t stop_cleaner = 0;
 
 char html_file[]="<!DOCTYPE html> <html data-theme=\"dark\"> <head> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\"> </head> <body> <h1 style=\"text-align: center;\">Sensor Info</h1> <table role=\"grid\"> <thead> <tr> <th scope=\"col\">Temperature</th> <th scope=\"col\">Humidty</th> <th scope=\"col\">CO2</th> <th scope=\"col\">TVOC</th> </tr> </thead> <tbody> <tr> <td> °C</td> <td> %</td> <td> ppm</td> <td> ppm</td> </tr> </tbody> </table> </body> </html>";
 
@@ -277,7 +279,7 @@ void sendWebsite()
 	HAL_Delay(100);
 	sendData(html_file);
 	HAL_Delay(100);
-	sendData("AT+CIPCLOSE=0\r\n");
+//	sendData("AT+CIPCLOSE=0\r\n");
 	HAL_Delay(100);
 	clearReceivedBuffer();
 	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
@@ -285,7 +287,8 @@ void sendWebsite()
 
 void sendUDPData(char* ip_address)
 {
-	float temp=0;
+	float temp = getTemperatureData();
+//	float temp =0;
 	char data[80] = {0};
 	if(car_mode == 0)
 		sprintf(data,"Mode: Manual\nTemperature: %.2f °C",temp);
@@ -415,6 +418,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			{
 				detect_stop = 1;
 			}
+        	// below is optional, for more precision
+        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='L')
+			{
+				detect_backward_left = 1;
+			}
+        	// backward right
+        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='R')
+			{
+				detect_backward_right = 1;
+			}
+        	// foward right
+        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='R')
+			{
+				detect_forward_right = 1;
+			}
+        	// forward left
+        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='L')
+			{
+				detect_forward_left = 1;
+			}
+
         	// change mode wirelessly
         	if(buffer[buffer_index-2]=='/' && buffer[buffer_index-1]=='C')
 			{
@@ -425,27 +449,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 				detect_request = 1;
 			}
 
+        	// cleaning motor controls
+        	if(buffer[buffer_index-2]=='G' && buffer[buffer_index-1]=='C')
+        	{
+        		start_cleaner = 1;
+        	}
+        	if(buffer[buffer_index-2]=='S' && buffer[buffer_index-1]=='C')
+        	{
+        		stop_cleaner =1;
+        	}
 
-        	// below is optional, for more precision
-//        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='L' && buffer[buffer_index]=='-')
-//			{
-//				detect_backward_left = 1;
-//			}
-//        	// backward right
-//        	if(buffer[buffer_index-2]=='B' && buffer[buffer_index-1]=='R' && buffer[buffer_index]=='-')
-//			{
-//				detect_backward_right = 1;
-//			}
-//        	// foward right
-//        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='R' && buffer[buffer_index]=='-')
-//			{
-//				detect_forward_right = 1;
-//			}
-//        	// forward left
-//        	if(buffer[buffer_index-2]=='F' && buffer[buffer_index-1]=='L' && buffer[buffer_index]=='-')
-//			{
-//				detect_forward_left = 1;
-//			}
 
         }
         HAL_UART_Receive_IT(&huart3, (uint8_t *)&single_buffer, 1);

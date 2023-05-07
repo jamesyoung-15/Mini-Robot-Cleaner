@@ -19,6 +19,8 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
@@ -255,7 +257,8 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
  ../Motor_Control/../ESP_Driver/../LCD/gui/../lvgl/lvgl-v8.3/src/extra/widgets/span/../../../lvgl.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h \
- ../Motor_Control/../ESP_Driver/../Motor_Control/car_movement.h
+ ../Motor_Control/../ESP_Driver/../Motor_Control/car_movement.h \
+ ../Motor_Control/../ESP_Driver/../UltraSonic_Sensors/lm35.h
 ../Motor_Control/car_movement.h:
 ../Motor_Control/../ESP_Driver/esp.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -277,6 +280,8 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
@@ -514,3 +519,4 @@ Motor_Control/car_movement.o: ../Motor_Control/car_movement.c \
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/esp.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h:
 ../Motor_Control/../ESP_Driver/../Motor_Control/car_movement.h:
+../Motor_Control/../ESP_Driver/../UltraSonic_Sensors/lm35.h:

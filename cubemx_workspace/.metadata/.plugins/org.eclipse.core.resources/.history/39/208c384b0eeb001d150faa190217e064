@@ -1,0 +1,9 @@
+#ifndef LM35_H
+#define LM35_H
+
+#include "stm32f1xx_hal.h"
+
+float getTemperatureData();
+
+
+#endif

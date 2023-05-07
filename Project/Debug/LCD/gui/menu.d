@@ -243,6 +243,8 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
@@ -255,6 +257,7 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h \
+ /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../UltraSonic_Sensors/lm35.h \
  /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h
 ../LCD/gui/menu.h:
 ../LCD/gui/../lvgl/lvgl-v8.3/lvgl.h:
@@ -501,6 +504,8 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
@@ -513,4 +518,5 @@ LCD/gui/menu.o: ../LCD/gui/menu.c ../LCD/gui/menu.h \
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../LCD/gui/menu.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/car_movement.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../Motor_Control/../ESP_Driver/esp.h:
+/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../ESP_Driver/../UltraSonic_Sensors/lm35.h:
 /home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD/../Motor_Control/car_movement.h:

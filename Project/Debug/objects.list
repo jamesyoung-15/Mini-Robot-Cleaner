@@ -6,6 +6,8 @@
 "./Core/Src/system_stm32f1xx.o"
 "./Core/Startup/startup_stm32f103vetx.o"
 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+"./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o"
+"./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.o"
 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.o"
 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
@@ -485,3 +487,4 @@
 "./Motor_Control/car_movement.o"
 "./Motor_Control/cleaning_motor.o"
 "./UltraSonic_Sensors/HC_SR04.o"
+"./UltraSonic_Sensors/lm35.o"

@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from enum import Enum
+import sys
 
 class Direction(Enum):
     Left = 0
@@ -13,11 +14,15 @@ class Direction(Enum):
     Up = 2
     Down = 3
     Stop = 4
+    UpRight = 5
+    UpLeft = 6
+    DownRight = 7
+    DownLeft = 8
 
 class Joystick(QWidget):
     def __init__(self, parent=None):
         super(Joystick, self).__init__(parent)
-        self.setMinimumSize(640, 480)
+        self.setMinimumSize(900, 900)
         self.movingOffset = QPointF(0, 0)
         self.grabCenter = False
         self.__maxDistance = 50
@@ -25,8 +30,8 @@ class Joystick(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         bounds = QRectF(-self.__maxDistance, -self.__maxDistance, self.__maxDistance * 2, self.__maxDistance * 2).translated(self._center())
-        painter.drawEllipse(bounds)
         painter.setBrush(QColor('#74c7ec'))
+        painter.drawEllipse(bounds)
         painter.drawEllipse(self._centerEllipse())
 
     def _centerEllipse(self):
@@ -53,12 +58,20 @@ class Joystick(QWidget):
 
         distance = min(currentDistance / self.__maxDistance, 1.0)
         if distance>0.3:
-            if 45 <= angle < 135:
+            if 35 <= angle < 55:
+                return (Direction.UpRight, distance)
+            elif 55 <= angle < 125:
                 return (Direction.Up, distance)
-            elif 135 <= angle < 225:
+            elif 125 <= angle < 145:
+                return (Direction.UpLeft, distance)
+            elif 145 <= angle < 215:
                 return (Direction.Left, distance)
-            elif 225 <= angle < 315:
+            elif 215 <= angle < 235:
+                return (Direction.DownLeft, distance)
+            elif 235 <= angle < 305:
                 return (Direction.Down, distance)
+            elif 305 <= angle < 325:
+                return (Direction.DownRight, distance)
             return (Direction.Right, distance)
         else:
             return (Direction.Stop,distance)
@@ -94,6 +107,20 @@ class Joystick(QWidget):
                 moveBackward()
             elif direction == Direction.Stop:
                 stop()
+            elif direction == Direction.UpLeft:
+                moveForwardLeft()
+            elif direction == Direction.UpRight:
+                moveForwardRight()
+            elif direction == Direction.DownLeft:
+                moveBackwardLeft()
+            elif direction == Direction.DownRight:
+                moveBackwardRight()
+
+    def keyPressEvent(self, event):
+        self.test_method()
+    
+    def test_method(self):
+        print('Space key pressed')
 
 
 
@@ -148,7 +175,30 @@ def stop():
     send("sp-")
     time.sleep(delay)
 
+def moveForwardRight():
+    print("Forward Right")
+    send("FR-")
+    time.sleep(delay)
 
+def moveForwardLeft():
+    print("Forward Left")
+    send("FL-")
+    time.sleep(delay)
+
+def moveBackwardRight():
+    print("Backward Right")
+    send("BR-")
+    time.sleep(delay)
+
+def moveBackwardLeft():
+    print("Backward Left")
+    send("BL-")
+    time.sleep(delay)
+
+# delay so that it's sending data to frequently
+delay = 0.1
+
+# UDP button actions
 def changeMode():
     print("Change mode")
     send("/C-")
@@ -161,43 +211,20 @@ def getData():
     send("/G-")
     time.sleep(delay)
 
-# def speedFast():
-# 	print("Change speed to fast")
-# 	send("GF")
+def stopCleaner():
+    print("Stop cleaner")
+    send("SC-")
 
-# def speedMed():
-# 	print("Change speed to medium")
-# 	send("GM")
-
-# def speedSlow():
-# 	print("Change speed to slow")
-# 	send("GS")
-
-# def moveForwardRight():
-#     send("FR-")
-#     time.sleep(delay)
-
-# def moveForwardLeft():
-#     send("FL-")
-#     time.sleep(delay)
-
-# def moveBackwardRight():
-#     send("BR-")
-#     time.sleep(delay)
-
-# def moveBackwardLeft():
-#     send("BL-")
-#     time.sleep(delay)
-
-# delay so that it's sending data to frequently
-delay = 0.1
+def startCleaner():
+    print("Start Cleaner")
+    send("GC-")
 
 
 
 
 if __name__ == '__main__':
     # Create main application window
-    app = QApplication([])
+    app = QApplication(sys.argv)
     mw = QMainWindow()
     mw.setStyleSheet("background-color: #1e1e2e")
     mw.setWindowTitle('Robot Control Interface')
@@ -216,26 +243,29 @@ if __name__ == '__main__':
     button2.setText("Change Robot Mode")
     button1.clicked.connect(getData)
     button2.clicked.connect(changeMode)
+    button1.setStyleSheet('background-color: #313244; color: white;')
+    button2.setStyleSheet('background-color: #313244; color:white')
     
-    # button3 = QPushButton()
-    # button3.setText("Change Speed to Slow")
-    # button4 = QPushButton()
-    # button4.setText("Change Speed to Medium")
-    # button5 = QPushButton()
+    button3 = QPushButton()
+    button3.setText("Start Cleaner")
+    button4 = QPushButton()
+    button4.setText("Stop Cleaner")
     # button5.setText("Change Speed to Fast")
-    # button3.clicked.connect(speedSlow)
-    # button4.clicked.connect(speedMed)
-    # button5.clicked.connect(speedFast)
+    button3.clicked.connect(startCleaner)
+    button4.clicked.connect(stopCleaner)
+    button3.setStyleSheet('background-color: #313244; color: white;')
+    button4.setStyleSheet('background-color: #313244; color:white')
 
+    button_layout = QGridLayout()
 
     # Create joystick 
     joystick = Joystick()
     ml.addWidget(joystick,0,0)
-    ml.addWidget(button1,1,0,alignment=Qt.AlignmentFlag.AlignCenter)
-    ml.addWidget(button2,2,0,alignment=Qt.AlignmentFlag.AlignCenter)
-    # ml.addWidget(button3,3,0,alignment=Qt.AlignmentFlag.AlignLeft)
-    # ml.addWidget(button4,3,0,alignment=Qt.AlignmentFlag.AlignCenter)
-    # ml.addWidget(button5,3,0,alignment=Qt.AlignmentFlag.AlignRight)
+    button_layout.addWidget(button1,1,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    button_layout.addWidget(button2,1,1,alignment=Qt.AlignmentFlag.AlignCenter)
+    button_layout.addWidget(button3,2,0,alignment=Qt.AlignmentFlag.AlignCenter)
+    button_layout.addWidget(button4,2,1,alignment=Qt.AlignmentFlag.AlignCenter)
+    ml.addLayout(button_layout,1,0)
     mw.show()
 
     QApplication.instance().exec_()

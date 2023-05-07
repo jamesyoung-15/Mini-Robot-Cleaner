@@ -1,0 +1,7 @@
+#include "lm35.h"
+
+
+void getTemperatureData()
+{
+
+}

@@ -1,0 +1,12 @@
+#include "lm35.h"
+
+
+void getTemperatureData()
+{
+	HAL_ADC_Start(&hadc1);
+	  if (HAL_ADC_PollForConversion(&hadc1,5) == HAL_OK)
+	  {
+		  adcvalue = HAL_ADC_GetValue(&hadc1);
+		  temp = (adcvalue*330.0)/4095.0;
+	  }
+}

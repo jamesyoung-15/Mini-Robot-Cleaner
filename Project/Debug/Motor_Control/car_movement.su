@@ -2,8 +2,8 @@
 ../Motor_Control/car_movement.c:19:6:moveLeft	8	static
 ../Motor_Control/car_movement.c:34:6:moveForward	8	static
 ../Motor_Control/car_movement.c:49:6:moveBackward	8	static
-../Motor_Control/car_movement.c:62:6:stopMovement	8	static
-../Motor_Control/car_movement.c:78:6:moveBackwardLeft	8	static
-../Motor_Control/car_movement.c:90:6:moveBackwardRight	8	static
-../Motor_Control/car_movement.c:101:6:moveForwardRight	8	static
-../Motor_Control/car_movement.c:109:6:moveForwardLeft	8	static
+../Motor_Control/car_movement.c:64:6:stopMovement	8	static
+../Motor_Control/car_movement.c:81:6:moveBackwardLeft	8	static
+../Motor_Control/car_movement.c:96:6:moveBackwardRight	8	static
+../Motor_Control/car_movement.c:112:6:moveForwardRight	8	static
+../Motor_Control/car_movement.c:128:6:moveForwardLeft	8	static

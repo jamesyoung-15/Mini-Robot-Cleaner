@@ -1,0 +1,16 @@
+#include "cleaning_motor.h"
+
+void cleaning_on()
+{
+	// move cleaning motor
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_RESET);
+}
+
+void cleaning_off()
+{
+	// stop cleaning motor
+	printDebug("Cleaning motor off");
+	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_5,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_RESET);
+}

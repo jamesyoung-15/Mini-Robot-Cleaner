@@ -17,7 +17,6 @@ while True:
     dt = datetime.now()
     # modifies packet data
     modifiedMessage = message.decode()
-    print()
-    print(dt)
+    print("\nTime Received: " + str(dt)+"\n")
     print("Information Received:\n" + message.decode())
     # serverSocket.sendto(modifiedMessage.encode(), clientAddress)
