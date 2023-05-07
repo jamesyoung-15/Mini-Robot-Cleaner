@@ -202,7 +202,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //		}
 	    // I think I should use DMA for this to minimize CPU https://forum.lvgl.io/t/lvgl-is-very-slow-stm32f7-ssd1963-p16-advice-on-how-to-optimise-it/4611/22
 
-		// optimization attempt 2 using dma
+		// optimization attempt using dma
 		ILI9341_OpenWindow2(area->x1,area->y1,area->x2,area->y2);
 		uint32_t size = (area->x2 - area->x1 + 1) * (area->y2 - area->y1 + 1);
 		HAL_StatusTypeDef DMA_status = HAL_ERROR;

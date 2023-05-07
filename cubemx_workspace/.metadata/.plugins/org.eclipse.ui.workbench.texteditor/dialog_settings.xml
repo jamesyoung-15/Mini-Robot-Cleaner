@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="CIPCLOSE"/>
+		<item key="selection" value="single_buffer"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="single_buffer"/>
+			<item value="\n"/>
 			<item value="cipclose"/>
 			<item value="tcp"/>
 			<item value="front_middle"/>
@@ -21,8 +23,6 @@
 			<item value="�"/>
 			<item value="4545"/>
 			<item value="discon"/>
-			<item value="close"/>
-			<item value="cipsend"/>
 		</list>
 		<list key="replacehistory">
 			<item value="middle_sensor"/>
@@ -36,8 +36,8 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_X_ORIGIN" value="1102"/>
 		<item key="DIALOG_Y_ORIGIN" value="436"/>
-		<item key="DIALOG_WIDTH" value="408"/>
-		<item key="DIALOG_HEIGHT" value="480"/>
-		<item key="DIALOG_FONT_NAME" value="1|Hack|10.0|0|GTK|1|"/>
+		<item key="DIALOG_WIDTH" value="357"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
+		<item key="DIALOG_FONT_NAME" value="1|Sans|10.0|0|GTK|1|"/>
 	</section>
 </section>

@@ -27,8 +27,6 @@ uint8_t detect_change = 0;
 uint8_t start_cleaner = 0;
 uint8_t stop_cleaner = 0;
 
-char html_file[]="<!DOCTYPE html> <html data-theme=\"dark\"> <head> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\"> </head> <body> <h1 style=\"text-align: center;\">Sensor Info</h1> <table role=\"grid\"> <thead> <tr> <th scope=\"col\">Temperature</th> <th scope=\"col\">Humidty</th> <th scope=\"col\">CO2</th> <th scope=\"col\">TVOC</th> </tr> </thead> <tbody> <tr> <td> °C</td> <td> %</td> <td> ppm</td> <td> ppm</td> </tr> </tbody> </table> </body> </html>";
-
 void sendData(char * command)
 {
 	clearReceivedBuffer();
@@ -86,24 +84,8 @@ void verAT()
 	showResponse();
 }
 
-// set mac address of esp8266, for needing to connect to eduroam by setting mac address to be same as my laptop
-void setMacAddress(char *mac_addr)
-{
-	char at_command[40];
-	sprintf(at_command,"AT+CIPSTAMAC=\"%s\"\r\n",mac_addr);
-	sendData(at_command);
-	HAL_Delay(200);
-	clearReceivedBuffer();
-}
 
-void checkMac()
-{
-	sendData("AT+CIPAPMAC?");
-	HAL_Delay(50);
-	showResponse();
-}
-
-// Connect to WIFI and start server listening at port 80
+// Connect to WIFI
 void connectWifi(char* ssid, char* passwd)
 {
 	// set to station mode
@@ -111,7 +93,7 @@ void connectWifi(char* ssid, char* passwd)
 	HAL_Delay(200);
 //	showResponse();
 	clearReceivedBuffer();
-	// enable station dhcp, so router can give it a ip
+	// Enabled by default no need // enable station dhcp, so router can give it a ip
 //	sendData("AT+CWDHCP=1,1\r\n");
 //	HAL_Delay(200);
 //	showResponse();
@@ -135,74 +117,6 @@ void disconnectWifi()
 	clearReceivedBuffer();
 }
 
-// connect to mqtt broker, for project connect to local mosquitto service
-void connectMQTT(char*ip_address)
-{
-	// set mqtt user config, 2nd param means over tcp, 3rd is clientid, 4th is broker username, 5th is broker passwd, rest is certs and unrelated
-	sendData("AT+MQTTUSERCFG=0,1,\"ESP8266\",\"espressif\",\"1234567890\",0,0,\"\"\r\n");
-	HAL_Delay(200);
-	showResponse();
-
-	// connect to mqtt ip address, using port 1883
-//	char at_command[40];
-//	sprintf(at_command,"AT+MQTTCONN=0,\"%s\",1883,1\r\n",ip_address);
-//	sendData(at_command);
-//	HAL_Delay(200);
-//	showResponse();
-//	HAL_Delay(100);
-
-}
-
-// subscribe to a topic
-void subMQTT(char* topic)
-{
-	char at_command[40];
-	// subscribe to topic
-	sprintf(at_command,"AT+MQTTSUB=0,\"%s\"\r\n",topic);
-	sendData(at_command);
-	showResponse();
-//	clearReceivedBuffer();
-}
-
-// publish to a topic
-void pubMQTT(char* topic)
-{
-	char at_command[40];
-	// publish to topic
-	sprintf(at_command,"AT+MQTTPUB=0,\"%s\"\r\n",topic);
-	sendData(at_command);
-//	showResponse();
-	clearReceivedBuffer();
-}
-
-// unsubscribe to mqtt topic
-void unsubMQTT(char *topic)
-{
-	char at_command[40];
-	sprintf(at_command,"AT+MQTTUNSUB=0,\"%s\"\r\n",topic);
-	sendData(at_command);
-	HAL_Delay(100);
-//	showResponse();
-	clearReceivedBuffer();
-}
-
-// debug mqtt
-void queryMQTT()
-{
-	sendData("AT+MQTTCONN?\r\n");
-//	sendData("AT+MQTTSUB?");
-	HAL_Delay(200);
-	showResponse();
-}
-
-// close mqtt
-void resetMQTT()
-{
-	sendData("AT+MQTTCLEAN=0\r\n");
-	HAL_Delay(200);
-//	showResponse();
-	clearReceivedBuffer();
-}
 
 // create udp server
 void createUDPServer()
@@ -220,15 +134,12 @@ void createUDPServer()
 // create a tcp server, for web browser and http server
 void createTCPServer()
 {
-	// enable multiple connections, for tcp
-	sendData("AT+CIPMUX=1\r\n");
-	HAL_Delay(200);
-	clearReceivedBuffer();
+
 	// create tcp server, listening at port 80
 	sendData("AT+CIPSERVER=1,80\r\n");
 	HAL_Delay(200);
-//	showResponse();
-	clearReceivedBuffer();
+	showResponse();
+//	clearReceivedBuffer();
 }
 
 
@@ -272,17 +183,43 @@ void okResponse()
 // sends html file to server
 void sendWebsite()
 {
-	__HAL_UART_DISABLE_IT(&huart3, UART_IT_RXNE);
+	sendData("AT+CIFSR\r\n");
+	HAL_Delay(100);
+	char temp[50]={0};
+	if(strstr(buffer,"STAIP")!=NULL)
+	{
+		char *find = strstr(buffer,"STAIP");
+		int pos = find - buffer;
+		pos += 7;
+		int i =0;
+		while(buffer[pos]!='"')
+		{
+			temp[i] = buffer[pos];
+			pos++;
+			i++;
+		}
+	}
+	else
+	{
+		sprintf(temp,"Error Reading IP.");
+	}
+
+	clearReceivedBuffer();
+
+
+	char website[1024] = {0};
 	char at_command[50] = {0};
-	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(html_file));
+
+	sprintf(website,"<!DOCTYPE html> <html data-theme=\"dark\"> <head> <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css\"> </head> <body> <h1 style=\"text-align: center;\">Robot Info</h1> <table role=\"grid\"> <thead> <tr> <th scope=\"col\">IP Address</th> <th scope=\"col\">Temperature</th> </tr> </thead> <tbody> <tr> <td>%s</td> <td>%.2f °C</td> </tr> </tbody> </table> </body> </html>",temp,getTemperatureData());
+
+	sprintf(at_command,"AT+CIPSEND=0,%i\r\n",strlen(website));
 	sendData(at_command);
 	HAL_Delay(100);
-	sendData(html_file);
+	sendData(website);
 	HAL_Delay(100);
-//	sendData("AT+CIPCLOSE=0\r\n");
+	sendData("AT+CIPCLOSE=0\r\n");
 	HAL_Delay(100);
 	clearReceivedBuffer();
-	__HAL_UART_ENABLE_IT(&huart3, UART_IT_RXNE);
 }
 
 void sendUDPData(char* ip_address)

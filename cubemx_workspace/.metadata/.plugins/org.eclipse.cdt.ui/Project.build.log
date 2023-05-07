@@ -1,26 +1,10 @@
-01:06:44 **** Incremental Build of configuration Debug for project Project ****
+18:33:46 **** Incremental Build of configuration Debug for project Project ****
 make -j16 all 
-arm-none-eabi-gcc "../LCD/gui/menu.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/Motor_Control" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -MMD -MP -MF"LCD/gui/menu.d" -MT"LCD/gui/menu.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "LCD/gui/menu.o"
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xE -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/LCD" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/ESP_Driver" -I"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/Motor_Control" -O1 -ffunction-sections -fdata-sections -Wall -fdata-sections -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-../LCD/gui/menu.c: In function 'event_handler':
-../LCD/gui/menu.c:24:12: warning: passing argument 1 of 'printMode' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-   24 |  printMode(mode);
-      |            ^~~~
-In file included from ../LCD/gui/menu.c:1:
-../LCD/gui/menu.h:16:22: note: expected 'char *' but argument is of type 'const char *'
-   16 | void printMode(char* mode);
-      |                ~~~~~~^~~~
-arm-none-eabi-gcc -o "Project.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/jamesyoung/Documents/School/ELEC3300-Project/Project/STM32F103VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Project.elf
- 
 arm-none-eabi-size   Project.elf 
-arm-none-eabi-objdump -h -S  Project.elf  > "Project.list"
    text	   data	    bss	    dec	    hex	filename
- 247204	   1456	  51512	 300172	  4948c	Project.elf
+ 247916	    912	  51512	 300340	  49534	Project.elf
 Finished building: default.size.stdout
  
-Finished building: Project.list
- 
 
-01:06:47 Build Finished. 0 errors, 1 warnings. (took 3s.670ms)
+18:33:49 Build Finished. 0 errors, 0 warnings. (took 2s.552ms)
 

@@ -53,12 +53,7 @@ void checkAT();
 void resetEsp();
 void connectWifi(char* ssid, char* passwd);
 void disconnectWifi();
-// mqtt functions
-void connectMQTT(char*ip_address);
-void subMQTT(char* topic);
-void unsubMQTT(char *topic);
-void queryMQTT();
-void resetMQTT();
+
 // tcp and http functions
 void sendResponse(char *response);
 void okResponse();

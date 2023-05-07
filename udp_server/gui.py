@@ -1,4 +1,3 @@
-import keyboard
 import time
 import os
 from socket import *
@@ -30,8 +29,9 @@ class Joystick(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         bounds = QRectF(-self.__maxDistance, -self.__maxDistance, self.__maxDistance * 2, self.__maxDistance * 2).translated(self._center())
-        painter.setBrush(QColor('#74c7ec'))
+        painter.setBrush(QColor('#11111b'))
         painter.drawEllipse(bounds)
+        painter.setBrush(QColor('#74c7ec'))
         painter.drawEllipse(self._centerEllipse())
 
     def _centerEllipse(self):

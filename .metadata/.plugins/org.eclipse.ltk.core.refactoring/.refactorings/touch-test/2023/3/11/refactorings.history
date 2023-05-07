@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;il9341.c, il9341.h, xpt2046.c, xpt2046.h&apos; to &apos;lcd_core&apos;" description="Move 4 resources to &apos;lcd_core&apos;" destination="lcd/lcd_core" element1="lcd/il9341.c" element2="lcd/il9341.h" element3="lcd/xpt2046.c" element4="lcd/xpt2046.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="4" stamp="1678869764723" updateReferences="true"/>
-</session>

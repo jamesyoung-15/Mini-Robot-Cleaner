@@ -10,8 +10,8 @@ float getTemperatureData()
 	{
 		adcvalue = HAL_ADC_GetValue(&hadc1);
 //		temp = (adcvalue*3.3*100)/4095;
-		temp = (adcvalue*3*100)/4095;
+		temp = (adcvalue*3.2*100)/4095;
 	}
-//	HAL_ADC_Stop(&hadc1);
+	HAL_ADC_Stop(&hadc1);
 	return temp;
 }
