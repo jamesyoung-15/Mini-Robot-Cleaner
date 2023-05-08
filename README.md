@@ -3,7 +3,7 @@ Final course project for ELEC3300 (Introduction to Embedded Systems) in HKUST wh
 
 Here is a demo video: [Youtube Link](https://youtu.be/z4BqyFa29B0)
 
-![](./resources/final-project/final_photo6.jpg)
+![](./resources/final_photo6.jpg)
 
 Project Presentation: [Link](./resources/ProjectPresentation.pdf)
 
@@ -31,7 +31,7 @@ Project Presentation: [Link](./resources/ProjectPresentation.pdf)
 
 - Connections:
 
-![](./resources/final-project/final_ioc.png)
+![](./resources/final_ioc.png)
 
 - STM32 connects to LCD through FSMC for display and touch screen, communicates to ESP8266 through UART, connects to motor driver and ultrasonic sensors through GPIO, LM35 with ADC.
 
