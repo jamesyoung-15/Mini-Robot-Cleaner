@@ -1,5 +1,5 @@
 # Mini Robot Cleaner
-Final course project for ELEC3300 (Introduction to Embedded Systems) in HKUST where we created a Mini-Robot Cleaner with STM32 as the MCU. The robot has 2 modes which are manual mode where the user can control the robot wirelessly through UDP transmissions (via Python script) and also a automatic mode where the robot card will move freely and avoid obstacles using the "bubble rebound algorithm" described by [this paper]((https://www.researchgate.net/publication/228955195_Simple_real-time_obstacle_avoidance_algorithm_for_mobile_robots)). Robot car can also send temperature sensor data to a UDP server.
+Final course project for ELEC3300 (Introduction to Embedded Systems) in HKUST where we created a Mini-Robot Cleaner with STM32 as the MCU. The robot has 2 modes which are manual mode where the user can control the robot wirelessly through UDP transmissions (via Python script) and also a automatic mode where the robot card will move freely and avoid obstacles using the "bubble rebound algorithm" described by [this paper](https://www.researchgate.net/publication/228955195_Simple_real-time_obstacle_avoidance_algorithm_for_mobile_robots). Robot car can also send temperature sensor data to a UDP server.
 
 Here is a demo video: [Youtube Link](https://youtu.be/z4BqyFa29B0)
 
