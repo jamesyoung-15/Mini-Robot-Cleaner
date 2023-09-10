@@ -40,6 +40,7 @@ Project Presentation: [Link](./resources/ProjectPresentation.pdf)
 
 - STM32 connects to LCD through FSMC for display and touch screen, communicates to ESP8266 through UART, connects to motor driver and ultrasonic sensors through GPIO, LM35 with ADC.
 
+- Also used compiler optimization and removed certain parts of library (otherwise LVGL library is too large)
 
 ## Repo Folder Structure
 - [Project](./Project/) contains the main project code that was used in CubeIDE 
